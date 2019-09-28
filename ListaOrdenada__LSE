@@ -1,0 +1,33 @@
+#ifndef _LISTAORD
+#define _LISTAORD
+#include<iostream>
+using namespace std;
+
+class ListaOrdenada {
+    class Celda;    // Prototipo
+    private:
+        Celda * primera;
+	    Celda * ultima;
+      
+	    class Celda{
+	        public:
+                int elemento;
+  			    Celda * siguiente;
+  			    Celda(int);
+  			    ~Celda();
+	     };
+	public:
+		ListaOrdenada(); //Iniciar(L)
+		~ListaOrdenada(); //Destruir(L)
+		void vaciar(); //Vaciar(L)
+		bool vacia(); //Vacia(L)
+		void insertar(int,int); //Insertar(e,p,L)
+		void borrar(int); //Borrar(e,L)
+		int recuperar(int); //Recuperar(p,L)
+		int numElem(); //NumElem(L)
+		int primera(); //Primera(L)
+		int ultima(); //Ultima(L)
+		int siguiente(int); //Siguiente(L)
+		int anterior(int); //Anterior(L)
+};
+#endif
