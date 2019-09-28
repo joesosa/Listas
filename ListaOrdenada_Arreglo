@@ -6,6 +6,7 @@ using namespace std;
 class ListaOrdenada {
     private:
         int * listaOrd;
+	int ultimoLleno;
 	public:
 		ListaOrdenada(int); //Iniciar(L)
 		~ListaOrdenada(); //Destruir(L)
