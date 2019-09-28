@@ -9,7 +9,8 @@ class ListaPos {
     class Celda;    // Prototipo
     private:
 		int* listaPos; 
-
+		int ultimoLleno;
+		
 	public:
 		ListaPos(int); //Iniciar(L)
 		~ListaPos(); //Destruir(L)
