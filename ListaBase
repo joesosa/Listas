@@ -1,0 +1,25 @@
+#ifndef _LISTA
+#define _LISTA
+#include<iostream>
+using namespace std;
+
+class Lista {
+   class Celda;    // Prototipo
+   private:
+        Celda * primera;
+	    Celda * ultima;
+      
+	    class Celda{
+	        public:
+                int elemento;
+  			    Celda * anterior;
+  			    Celda * siguiente;
+  			    Celda( int );
+  			    ~Celda();
+	     };
+	public:
+		Lista();
+		~Lista();
+        Lista & insertar(char *, int);
+};
+#endif
