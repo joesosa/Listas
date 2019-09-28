@@ -11,7 +11,7 @@ class ListaPos {
 		int* listaPos; 
 
 	public:
-		ListaPos(); //Iniciar(L)
+		ListaPos(int); //Iniciar(L)
 		~ListaPos(); //Destruir(L)
 		void vaciar(); //Vaciar(L)
 		bool vacia(); //Vacia(L)
