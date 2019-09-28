@@ -1,10 +1,4 @@
-/* 1. Implementar el modelo Lista Posicionada utilizando las estructuras de datos: Lista Simplemente Enlazada.
-
-2. Implementar el modelo Lista Indexada utilizando las estructuras de datos: Arreglo y Lista
-Simplemente Enlazada.
-
-3. Implementar el modelo Lista Ordenada utilizando las estructuras de datos: Arreglo y Lista
-Simplemente Enlazada. */
+// 1. Implementar el modelo Lista Posicionada utilizando las estructuras de datos: Lista Simplemente Enlazada.
 
 #ifndef _LISTAP
 #define _LISTAP
