@@ -1,9 +1,8 @@
 #include "ListaIndexada_Arreglo.h"
 
-ListaInd::ListaInd(int tamano){
-    listaI = new int[tamano];
+ListaInd::ListaInd(int espacio){
+    listaI = new int[espacio];
     ultimoLleno = -1;
-    length = tamano;
 }
 
 ListaInd::~ListaInd(){
@@ -17,70 +16,62 @@ void ListaInd::vaciar(){
 bool ListaInd::vacia(){
     return ultimoLleno == -1;
 }
-//esperar respuesta
-void ListaInd::insertar(int elemento,int indice){ 
-    if(indice < length && indice >= 0){  
+
+void ListaInd::insertar(int elemento, int indice){ 
+    if(indice >= 0 && indice <= ultimoLleno+1){  
         for(int i = ultimoLleno; i >= indice; --i){
             listaI[i+1] = listaI[i]; 
         }
         listaI[indice] = elemento;
-        indice > ultimoLleno ? ultimoLleno = indice;
+        ++ultimoLleno;
     }
     else{
-        cout << "Indice mayor a la M"<<endl;
+        cout << "No se puede insertar en ese Indice "<<endl;
     }
 }
-//esperar respuesta
+
 void ListaInd::borrar(int indice){
-    if(indice < length && indice >= 0){
-        istaI[indice] = -1;
-        if(indice == ultimoLleno){
-            ultimoLleno = -1;
-            for(int i = 0; i < length;++i){
-                listaI[i] > ultimoLleno ? ultimoLleno = listaI[i];
-            }
+    if(indice >= 0 && indice <= ultimoLleno){
+        for(int i = indice; i < ultimoLleno;++i){
+            listaI[i] = listaI[i+1];
         }
+        --ultimoLleno; //el pasado ultimo lleno se deja como estaba?
     }
     else{
-        cout << "Indice mayor a la M"<<endl;
+        cout << "No existe el elemento en la lista"<<endl;
     }
 }
 
 int ListaInd::recuperar(int indice){
-    if(indice < length && indice >= 0){
+    if(indice >= 0 && indice <= ultimoLleno){
         return listaI[indice];
     }
     else{
-        cout << "Indice mayor a la M"<<endl;
+        cout << "No existe el elemento en la lista"<<endl;
         return -1;
     }
 }
 
 void ListaInd::modificar(int indice, int elemento){
-    if(indice < length && indice >= 0){
+    if(indice >= 0 && indice <= ultimoLleno){
         listaI[indice] = elemento;
     }
     else{
-        cout << "Indice mayor a la M"<<endl;
+        cout << "No existe el elemento en la lista"<<endl;
     }
 }
 
 void ListaInd::intercambiar(int indice1,int indice2){
-    if(indice1 < length && indice1 >= 0 && indice2 < length && indice2 >= 0){
+    if(indice1 >= 0 && indice1 <= ultimoLleno && indice2 >= 0 && indice2 <= ultimoLleno){
         int aux = listaI[indice1];
         listaI[indice1] = listaI[indice2];
         listaI[indice2] = aux; 
     }
     else{
-        cout << "Indice mayor a la M"<<endl;
+        cout << "No existe el elemento en la lista"<<endl;
     }
 }
 
 int ListaInd::numElem(){
-    int cont = 0;
-    for(int i = 0; i < ultimoLleno; ++i){
-        if(listaI[i] != -1){
-            ++cont;
-        }
-    }
+    return ultimoLleno +1;
 } 
