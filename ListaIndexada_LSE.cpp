@@ -163,5 +163,6 @@ void ListaInd::imprimir(){
         cout << actual->elemento << "\t";
         actual = actual->siguiente;
     }
+	cout<<endl;
 
 }
