@@ -56,7 +56,7 @@ int ListaInd::recuperar(int indice){
     }
 }
 
-void ListaInd::modificar(int indice, int elemento){
+void ListaInd::modificar(int elemento, int indice){
     if(indice >= 0 && indice <= ultimoLleno){
         listaI[indice] = elemento;
     }
@@ -84,4 +84,5 @@ void ListaInd::imprimir(){
     for(int i = 0; i <= ultimoLleno; ++i){
         cout << listaI[i]<<"\t";
     }
+	cout << endl;
 }
