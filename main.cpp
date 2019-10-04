@@ -25,7 +25,7 @@ int main(){
 		listaI.insertar(i*3,i);
 	}
 	
-	listaI.recuperar(10);
+	cout<< listaI.recuperar(10)<<endl;
 	//imprimir
 	cout<<"La lista tiene: "<<listaI.numElem()<<" elementos"<<endl;
 	listaI.borrar(10);
@@ -36,11 +36,11 @@ int main(){
 	listaI.modificar(-3,10);
 	cout<< listaI.recuperar(10)<<endl;
 
-	listaI.insertar(0,15);
+	listaI.insertar(0,14);
 	cout<<"La lista tiene: "<<listaI.numElem()<<" elementos"<<endl;
 
 	//imprimir
-	listaI.intercambiar(10,15);
+	listaI.intercambiar(10,1);
 	//imprimir
 
 }
