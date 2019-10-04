@@ -10,7 +10,7 @@ class ListaOrdenada {
 		int ultimoLleno;
   //  Iniciar, Destruir, Vaciar, Vacía, Agregar, Borrar, Primero, Último, Siguiente, Anterior y NumElem
 	public:
-		ListaOrdenada(int); //Iniciar(L)
+		ListaOrdenada(); //Iniciar(L)
 		~ListaOrdenada(); //Destruir(L)
 		void vaciar(); //Vaciar(L)
 		bool vacia(); //Vacia(L)
