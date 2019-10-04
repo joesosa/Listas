@@ -1,4 +1,7 @@
-#Include "ListaIndexada.h"
+#include <iostream>
+#include "ListaIndexada_LSE.h"
+using namespace std;
+
 
 
 
@@ -6,7 +9,7 @@
 int main(){
 	ListaInd listaI;
 
-	for (int i - 0; i<15;++i){
+	for (int i = 0; i<15;++i){
 		listaI.insertar(i*3,i);
 	}
 
@@ -18,14 +21,14 @@ int main(){
 	if(listaI.vacia())
 		cout<<"Esta vacia"<<endl;
 
-	for (int i - 0; i<15;++i){
+	for (int i = 0; i<15;++i){
 		listaI.insertar(i*3,i);
 	}
 	
 	listaI.recuperar(10);
 	//imprimir
 	cout<<"La lista tiene: "<<listaI.numElem()<<" elementos"<<endl;
-	cout<< listaI.borrar(10)<<endl;
+	listaI.borrar(10);
 	//imprimir
 	cout<<"La lista tiene: "<<listaI.numElem()<<" elementos"<<endl;
 	cout<< listaI.recuperar(10)<<endl;
@@ -39,5 +42,5 @@ int main(){
 	//imprimir
 	listaI.intercambiar(10,15);
 	//imprimir
-	
+
 }
