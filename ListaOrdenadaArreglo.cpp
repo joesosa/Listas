@@ -1,12 +1,12 @@
 #include "ListaOrdenadaArreglo.h"
-
+#define ESPACIO 20
 
 
 //Efecto: Inicializa la lista dejándola accesible para que el resto de operadores básicos puedan trabajar en ella.
 //Requiere: Este operador no tiene requerimientos.
 //Modifica: Modifica la lista.
-ListaOrdenada::ListaOrdenada(int espacio){
-    listaO = new int[espacio];
+ListaOrdenada::ListaOrdenada(){
+    listaO = new int[ESPACIO];
     ultimoLleno = -1;
     primera = -2;
 }
