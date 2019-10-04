@@ -26,10 +26,10 @@ int main(){
 	}
 	
 	cout<< listaI.recuperar(10)<<endl;
-	//imprimir
+	listaI.imprimir();
 	cout<<"La lista tiene: "<<listaI.numElem()<<" elementos"<<endl;
 	listaI.borrar(10);
-	//imprimir
+	listaI.imprimir();
 	cout<<"La lista tiene: "<<listaI.numElem()<<" elementos"<<endl;
 	cout<< listaI.recuperar(10)<<endl;
 
@@ -39,8 +39,8 @@ int main(){
 	listaI.insertar(0,14);
 	cout<<"La lista tiene: "<<listaI.numElem()<<" elementos"<<endl;
 
-	//imprimir
+	listaI.imprimir();
 	listaI.intercambiar(10,1);
-	//imprimir
+	listaI.imprimir();
 
 }
