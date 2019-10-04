@@ -31,19 +31,46 @@ void pruebaListaI(ListaInd& listaI){
         listaI.vacia() ? cout<< "Esta vacia" : cout <<"No esta vacia" << endl;       
         break;
     case 2:
-    cout<<"Que elemento desesa "
+        int elemento = 0;
+        cout<<"Que elemento desea insertar?\n"<<endl;
+        cin >> elemento;
+        int indice = 0;
+        cout<<"Que indice desea insertar? "<<endl;
+        cin >> indice;
+        listaI.insertar(elemento,indice);
+        listaI.imprimir();
         break;
     case 3:
-        
+        int indice = 0;
+        cout<<"Que elemento desea borrar?\n"<<endl;
+        cin >> indice;
+        listaI.borrar(indice);
+        listaI.imprimir();
         break;
     case 4:
-        
+        int indice = 0;
+        cout<<"Que elemento desea recuperar?\n"<<endl;
+        cin >> indice;
+        cout << listaI.recuperar(indice) << endl;
         break;
     case 5:
-        
+        int indice = 0;
+        cout<<"Que indice desea modificar? "<<endl;
+        cin >> indice;
+        int elemento = 0;
+        cout<<"Que elemento desea insertar en ese indice?\n"<<endl;
+        cin >> elemento;
+        listaI.imprimir();
         break;
     case 6:
-        
+        int indice1 = 0;
+        cout<<"Dijite el primer indice por intercambiar "<<endl;
+        cin >> indice1;
+        int indice2 = 0;
+        cout<<"Dijite el primer indice por intercambiar "<<endl;
+        cin >> indice2;
+        listaI.intercambiar(indice1,indice2);
+        listaI.imprimir();
         break;
     default:
         break;
