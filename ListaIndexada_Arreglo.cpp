@@ -1,8 +1,12 @@
 #include "ListaIndexada_Arreglo.h"
+#define ESPACIO 20
 
-ListaInd::ListaInd(int espacio){
-    listaI = new int[espacio];
+
+
+ListaInd::ListaInd(){
+    listaI = new int[ESPACIO];
     ultimoLleno = -1;
+    cout << "El tamano predeterminado es de 20"<<endl;
 }
 
 ListaInd::~ListaInd(){
@@ -75,3 +79,9 @@ void ListaInd::intercambiar(int indice1,int indice2){
 int ListaInd::numElem(){
     return ultimoLleno +1;
 } 
+
+void ListaInd::imprimir(){
+    for(int i = 0; i <= ultimoLleno; ++i){
+        cout << listaI[i]<<"\t";
+    }
+}
