@@ -5,21 +5,6 @@
 #include "ListaIndexada_Arreglo.h"
 //#include "ListaIndexada_LSE.h"
 
-
-int main(){
-    //listaP
-    //listaI
-    //listaO
-
-
-    
-
-
-
-
-}
-
-
 void pruebaListaI(ListaInd& listaI){
     int opcion = 0;
     cout << "¿Que desea hacer?\n1.Preguntar si la lista esta vacia\n2.Insertar Elemento\n3.Borrar Elemento\n4.Recuperar Elemento\n"
@@ -77,14 +62,21 @@ void pruebaListaI(ListaInd& listaI){
     }
 }
 
+int main(){
+    //listaP
+    //listaI
+    //listaO
 
-void vaciar(); //Vaciar(L)
-		bool vacia(); //Vacia(L)
-		void insertar(int,int); //Insertar(e,p,L)
-		void borrar(int); //Borrar(p,L)
-		int recuperar(int); //Recuperar(p,L)
-		void modificar(int, int); //Modificar(p,e,L)
-		void intercambiar(int,int); //Intercambiar(p1,p2,L)
-		int numElem(); //NumElem(L)
-        void imprimir();
+
+    
+
+
+
+
+}
+
+
+
+
+
 
