@@ -8,11 +8,12 @@ using namespace std;
 class ListaPos {
     class Celda;    // Prototipo
 	typedef Celda* posicion;
+	
     private:
         Celda * primera;
 	    Celda * ultima;
 		int numElementos;
-
+		
 	    class Celda{
 	        public:
                 int elemento;
@@ -21,7 +22,7 @@ class ListaPos {
   			    ~Celda();
 	     };
 	public:
-		ListaPos(int); //Iniciar(L)
+		ListaPos(); //Iniciar(L)
 		~ListaPos(); //Destruir(L)
 		void vaciar(); //Vaciar(L)
 		bool vacia(); //Vacia(L)
@@ -36,5 +37,6 @@ class ListaPos {
 		posicion getUltima(); //Ultima(L)
 		posicion siguiente(posicion); //Siguiente(p,L)
 		posicion anterior(posicion); //Anterior(p,L)
+		char* getNombre();
 };
 #endif

@@ -28,6 +28,6 @@ class ListaOrdenada {
     		int siguiente(int); // Siguiente(e,L)
     		int anterior(int); // Anterior(e,L)
 		int numElem(); //NumElem(L)
-		char* getId();
+		char* getNombre();
 };
 #endif

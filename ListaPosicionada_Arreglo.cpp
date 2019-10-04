@@ -1,7 +1,7 @@
 #include "ListaPosicionada_Arreglo.h"
 
-ListaPos::ListaPos(int tamanoMaximo){ //Iniciar(L)
-	vListaPos = new int[tamanoMaximo];
+ListaPos::ListaPos(){ //Iniciar(L)
+	vListaPos = new int[20];
 	ultimoLleno = -1;
 }	
 
@@ -67,4 +67,8 @@ ListaPos::posicion ListaPos::siguiente(posicion pos){ //Siguiente(p,L)
 
 ListaPos::posicion ListaPos::anterior(posicion pos){ //Anterior(p,L)
 	return pos-1;
+}
+
+char* ListaPos::getNombre() {
+	return (char*)"Arreglo";
 }

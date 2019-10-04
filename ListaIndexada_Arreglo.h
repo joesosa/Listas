@@ -14,7 +14,7 @@ class ListaInd {
 		int ultimoLleno;
 
 	public:
-		ListaInd(int); //Iniciar(L)
+		ListaInd(); //Iniciar(L)
 		~ListaInd(); //Destruir(L)
 		void vaciar(); //Vaciar(L)
 		bool vacia(); //Vacia(L)
@@ -24,6 +24,7 @@ class ListaInd {
 		void modificar(int, int); //Modificar(p,e,L)
 		void intercambiar(int,int); //Intercambiar(p1,p2,L)
 		int numElem(); //NumElem(L)
-		char* getId();
+		void imprimir();
+		char* getNombre();
 };
 #endif

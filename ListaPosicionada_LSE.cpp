@@ -32,9 +32,9 @@ bool ListaPos::vacia() {//Vacia(L)
 }
 
 void ListaPos::insertar(int elem, posicion pos) { //Insertar(e,p,L)
-	Celda nueva = new Celda(elem);
+	Celda* nueva = new Celda(elem);
 	if (pos == primera) {
-		nueva.siguiente = primera;
+		nueva->siguiente = primera;
 		primera = nueva;
 	}
 	else {
@@ -43,13 +43,13 @@ void ListaPos::insertar(int elem, posicion pos) { //Insertar(e,p,L)
 			actual = actual->siguiente;
 		}
 		actual->siguiente = nueva;
-		nueva.siguiente = pos;
+		nueva->siguiente = pos;
 	}
 	++numElementos;
 }
 
 void ListaPos::agregarUltimo(int elem) { //AgregarUltimo(e,L)
-	Celda nueva = new Celda(elem);
+	Celda* nueva = new Celda(elem);
 	if (!primera) {
 		primera = nueva;
 		ultima = nueva;
@@ -122,4 +122,8 @@ ListaPos::posicion ListaPos::anterior(posicion pos) { //Anterior(p,L)
 		actual = NULL;
 	}
 	return actual;
+}
+
+char* getNombre() {
+	return (char*)"L.S.E.";
 }

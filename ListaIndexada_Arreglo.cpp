@@ -86,3 +86,7 @@ void ListaInd::imprimir(){
     }
 	cout << endl;
 }
+
+char* ListaInd::getNombre() {
+	return (char*)"Arreglo";
+}
