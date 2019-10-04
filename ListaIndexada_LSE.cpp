@@ -127,7 +127,7 @@ void ListaInd::intercambiar(int indice1,int indice2){
     int cont = 0;
     Celda * porIntercambiar1 = 0;
     Celda * porIntercambiar2 = 0;
-    while(actual && (cont < indice1 || cont < indice2) ){ //revisar
+    while(actual && (cont <= indice1 || cont <= indice2) ){ //revisar
         if(cont == indice1){
             porIntercambiar1 = actual;
         }
@@ -155,4 +155,13 @@ int ListaInd::numElem(){
         actual = actual->siguiente;
     }
     return cont;
+}
+
+void ListaInd::imprimir(){
+    Celda * actual = primera;
+    while(actual){
+        cout << actual->elemento << "\t";
+        actual = actual->siguiente;
+    }
+
 }
