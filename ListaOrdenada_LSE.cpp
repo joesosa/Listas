@@ -196,3 +196,7 @@ int ListaOrdenada::numElem(){
   }
   return cont;
 }
+
+char* getNombre() {
+	return "L.S.E.";
+}
