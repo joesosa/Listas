@@ -137,3 +137,7 @@ int ListaOrdenada::anterior(int elemento){
 int ListaOrdenada::numElem(){
     return ultimoLleno+1;
 }
+
+char* getNombre() {
+	return "Arreglo";
+}
