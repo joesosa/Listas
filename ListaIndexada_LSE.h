@@ -28,7 +28,6 @@ class ListaInd {
 		void modificar(int, int); //Modificar(p,e,L)
 		void intercambiar(int,int); //Intercambiar(p1,p2,L)
 		int numElem(); //NumElem(L)
-		
-
+		char* getId();
 };
 #endif
