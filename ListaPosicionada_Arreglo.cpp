@@ -7,6 +7,7 @@ ListaPos::ListaPos(int tamanoMaximo){ //Iniciar(L)
 
 ListaPos::~ListaPos(){
 	delete vListaPos;	//Destruir(L)
+	delete this;
 }
 
 void ListaPos::vaciar(){ //Vaciar(L)
@@ -17,7 +18,7 @@ bool ListaPos::vacia(){ //Vacia(L)
 	return (ultimoLleno == -1); 
 }
 
-void ListaPos::insertar(int elem, int pos){ //Insertar(e,p,L)
+void ListaPos::insertar(int elem, posicion pos){ //Insertar(e,p,L)
 	for(int i = ultimoLleno+1; i> pos ;--i)
 		vListaPos[i]= vListaPos[i-1];
 	vListaPos[pos]= elem;
@@ -28,21 +29,21 @@ void ListaPos::agregarUltimo(int elem){ //AgregarUltimo(e,L)
 	vListaPos[++ultimoLleno] = elem;
 }
 
-void ListaPos::borrar(int pos){ //Borrar(p,L)
+void ListaPos::borrar(posicion pos){ //Borrar(p,L)
 	for(int i = pos; i< ultimoLleno ;++i)
 			vListaPos[i]= vListaPos[i+1];
 	--ultimoLleno;
 }
 
-int ListaPos::recuperar(int pos){ //Recuperar(p,L)
+int ListaPos::recuperar(posicion pos){ //Recuperar(p,L)
 	return vListaPos[pos];
 }
 
-void ListaPos::modificar(int pos, int elem){ //Modificar(p,e,L)
+void ListaPos::modificar(posicion pos, int elem){ //Modificar(p,e,L)
 	vListaPos[pos] = elem;
 }
 
-void ListaPos::intercambiar(int pos1, int pos2){ //Intercambiar(p1,p2,L)
+void ListaPos::intercambiar(posicion pos1, posicion pos2){ //Intercambiar(p1,p2,L)
 	int auxiliar = vListaPos[pos1];
 	vListaPos[pos1] = vListaPos[pos2];
 	vListaPos[pos2] = auxiliar;
@@ -52,18 +53,18 @@ int ListaPos::numElem(){ //NumElem(L)
 	return ultimoLleno+1;
 }
 
-int ListaPos::primera(){ //Primera(L)
+ListaPos::posicion ListaPos::getPrimera(){ //Primera(L)
 	return vListaPos[0];
 }
 
-int ListaPos::ultima(){ //Ultima(L)
+ListaPos::posicion ListaPos::getUltima(){ //Ultima(L)
 	return vListaPos[ultimoLleno];
 }
 
-int ListaPos::siguiente(int pos){ //Siguiente(p,L)
+ListaPos::posicion ListaPos::siguiente(posicion pos){ //Siguiente(p,L)
 	return (pos!=ultimoLleno)? pos+1 : -1;
 }
 
-int ListaPos::anterior(int pos){ //Anterior(p,L)
+ListaPos::posicion ListaPos::anterior(posicion pos){ //Anterior(p,L)
 	return pos-1;
 }

@@ -7,159 +7,113 @@ ListaPos::Celda::Celda(int valor) {
 }
 
 ListaPos::Celda::~Celda() {
+	anterior = NULL;
 	if (siguiente)
 		delete siguiente;
 }
 
-ListaPos::ListaPos() {
+ListaPos::ListaPos() { //Iniciar(L)
 	primera = NULL;
 	ultima = NULL;
-	numElem = 0;
+	numElementos = 0;
 }
 
-ListaPos::~ListaPos() {
+ListaPos::~ListaPos() { //Destruir(L)
 	vaciar();
 	delete this;
 }
 
-void ListaPos::vaciar() { 
+void ListaPos::vaciar() { //Vaciar(L)
 	if (primera)
 		delete primera;
 	ultima = NULL;
 }
 
-bool ListaPos::vacia() {
-	return !numElem;
+bool ListaPos::vacia() { //Vacia(L)
+	return !numElementos;
 }
 
-void ListaPos::insertar(int elem, int pos) {
+void ListaPos::insertar(int elem, posicion pos) { //Insertar(e,p,L)
 	Celda nueva = new Celda(elem);
-	if (pos == 1) {
+	if (pos == primera) {
 		nueva.siguiente = primera;
-		if(primera)
-			primera->anterior = nueva;
+		primera->anterior = nueva;
 		primera = nueva;
 	}
-	else if (pos > 1 && pos < numElementos)
-	{
-		Celda* actual = primera;
-		for (int i = 1; i < pos - 1; ++i)
-			actual = actual->siguiente;
-		Celda* auxiliar = actual->siguiente;
-		actual->siguiente = nueva;
-		nueva.anterior = actual;
-		nueva.siguiente = auxiliar;
-		auxiliar->anterior = nueva;
+	else {
+		Celda* auxiliar = pos->anterior;
+		auxiliar->siguiente = nueva;
+		nueva.anterior = auxiliar;
+		nueva.siguiente = pos;
+		pos->anterior = nueva;
 	}
 	++numElementos;
 }
 
-void ListaPos::agregarUltimo(int elem) {
+void ListaPos::agregarUltimo(int elem) { //AgregarUltimo(e,L)
 	Celda nueva = new Celda(elem);
 	if (!primera) {
 		primera = nueva;
 		ultima = nueva;
-		numElementos = 1;
 	}
 	else {
 		ultima->siguiente = nueva;
 		nueva.anterior = ultima;
 		ultima = nueva;
-		++numElementos;
 	}
-
+	++numElementos;
 }
 
-void ListaPos::borrar(int pos) {
-	if (pos == 1) {
-		Celda* victima = primera;
+void ListaPos::borrar(posicion pos) { //Borrar(p,L)
+	if (pos == primera) {
 		primera = primera->siguiente;
 		primera->anterior = NULL;
-		victima->siguiente = NULL;
-		delete victima;
+		pos->siguiente = NULL;
+		delete pos;
 	}
 	else {
-		Celda* actual = primera;
-		for (int i = 1; i < pos - 1; ++i)
-			actual = actual->siguiente;
-		if (actual->siguiente) {
-			Celda* victima = actual->siguiente;
-			actual->siguiente = victima->siguiente;
-			victima->siguiente->anterior = actual;
-			if (ultima == victima)
-				ultima = actual;
-			victima->siguiente = NULL;
-			delete victima;
-		}
+		pos->anterior->siguiente = pos->siguiente;
+		if (ultima == pos)
+			ultima = pos->anterior;
+		else
+			pos->siguiente->anterior = pos->anterior;
+		pos->siguiente = NULL;
+		pos->anterior = NULL;
+		delete pos;
 	}
+	--numElementos;
 }
 
-int ListaPos::recuperar(int pos) {
-	Celda* actual = primera;
-	for (int i = 1; i < pos; ++i)
-		actual = actual->siguiente;
-	return actual->elemento;
+int ListaPos::recuperar(posicion pos) { //Recuperar(p,L)
+	return pos->elemento;
 }
 
-void ListaPos::modificar(int pos, int elem) {
-	Celda* actual = primera;
-	for (int i = 1; i < pos; ++i)
-		actual = actual->siguiente;
-	actual->elemento = elem;
+void ListaPos::modificar(posicion pos, int elem) { //Modificar(p,e,L)
+	pos->elemento = elem;
 }
 
-void ListaPos::intercambiar(int pos1, int pos2) { // CASO ULTIMA FALTAAAAAA con numElementos
-	if ((pos1 == 1 && pos2 > 1) || (pos2 == 1 && pos1 > 1)) {
-		Celda* actual1 = primera;
-		Celda* actual2 = primera;
-		for (int i = 1; i < pos1 - 1; ++i)
-			actual1 = actual1->siguiente;
-		Celda* auxiliar = actual1->siguiente->siguiente;
-		actual1->siguiente->siguiente = actual2->siguiente;
-		primera = actual1->siguiente;
-		actual1->siguiente = actual2;
-		actual2->siguiente = auxiliar;
-	}
-	else if (pos1 > 1 && pos2 > 1)
-	{
-		Celda* actual1 = primera;
-		Celda* actual2 = primera;
-		for (int i = 1; i < pos1 - 1; ++i)
-			actual1 = actual1->siguiente;
-		for (int i = 1; i < pos2 - 1; ++i)
-			actual2 = actual2->siguiente;
-
-		Celda* auxiliar = actual1->siguiente;
-		actual1->siguiente = actual2->siguiente;
-		actual2->siguiente = auxiliar;
-
-		auxiliar = actual1->siguiente->siguiente;
-		actual1->siguiente->siguiente = actual2->siguiente->siguiente;
-		actual2->siguiente->siguiente = auxiliar;
-	}
+void ListaPos::intercambiar(posicion pos1, posicion pos2) { //Intercambiar(p1,p2,L)
+	int aux = recuperar(pos1);
+	pos1->elemento = pos2->elemento;
+	pos2->elemento = aux;
 }
 
-int ListaPos::numElem() {
+int ListaPos::numElem() { //NumElem(L)
 	return numElementos;
 }
 
-ListaPos::Celda* ListaPos::getPrimera() {
+ListaPos::posicion ListaPos::getPrimera() { //Primera(L)
 	return primera;
 }
 
-ListaPos::Celda* ListaPos::getUltima() {
+ListaPos::posicion ListaPos::getUltima() { //Ultima(L)
 	return ultima;
 }
 
-ListaPos::Celda* ListaPos::siguiente(int pos) {
-	Celda* actual = primera;
-	for (int i = 1; i < pos; ++i)
-		actual = actual->siguiente;
-	return actual->siguiente;
+ListaPos::posicion ListaPos::siguiente(posicion pos) { //Siguiente(p,L)
+	return pos->siguiente;
 }
 
-ListaPos::Celda* ListaPos::anterior(int pos) {
-	Celda* actual = primera;
-	for (int i = 1; i < pos; ++i)
-		actual = actual->siguiente;
-	return actual->anterior;
+ListaPos::posicion ListaPos::anterior(posicion pos) { //Anterior(p,L)
+	return pos->anterior;
+}
