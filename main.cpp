@@ -34,14 +34,14 @@ void pruebaListaP(ListaPos& listaO){ //NO ESTA LISTO!!!!!!
 			cout<<"Que indice desea insertar? "<<endl;
 			cin >> indice;
 			listaP.insertar(elemento,indice);
-			listaP.imprimir();
+			//listaP.imprimir();
 			break;
 		case 3:
 			indice = 0;
 			cout<<"Que elemento desea borrar?\n"<<endl;
 			cin >> indice;
 			listaP.borrar(indice);
-			listaP.imprimir();
+			//listaP.imprimir();
 			break;
 		case 4:
 			indice = 0;
@@ -56,7 +56,7 @@ void pruebaListaP(ListaPos& listaO){ //NO ESTA LISTO!!!!!!
 			elemento = 0;
 			cout<<"Que elemento desea insertar en ese indice?\n"<<endl;
 			cin >> elemento;
-			listaP.imprimir();
+			//listaP.imprimir();
 			break;
 		case 6:
 			indice1 = 0;
@@ -66,7 +66,7 @@ void pruebaListaP(ListaPos& listaO){ //NO ESTA LISTO!!!!!!
 			cout<<"Digite el primer indice por intercambiar "<<endl;
 			cin >> indice2;
 			listaP.intercambiar(indice1,indice2);
-			listaP.imprimir();
+			//listaP.imprimir();
 			break;
 		case 7:
 			cout<<"La lista tiene "<< listaP.numElem() <<" elementos"<<endl;
