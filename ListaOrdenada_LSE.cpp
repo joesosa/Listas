@@ -35,17 +35,16 @@ ListaOrdenada::~ListaOrdenada(){
 //Requiere: Una lista inicializada.
 //Modifica: Modifica la lista.
 void ListaOrdenada::vaciar(){
-  if(primera->siguiente){
-      delete primera->siguiente;
+  if(primera){
+      delete primera;
   }
-  primera = 0;
 }
 
 //Efecto: Devuelve un valor de verdad (verdadero o falso) acorde al estado de la lista recibida.
 //Requiere: Una lista inicializada.
 //Modifica: No aplica.
 bool ListaOrdenada::vacia(){
-    return primera;
+    return !primera;
 }
 
 //Efecto: Agrega el elemento recibido como parámetro en su posición correspondiente,
@@ -55,41 +54,51 @@ bool ListaOrdenada::vacia(){
 //Modifica: Modifica la lista.
 void ListaOrdenada::insertar(int elemento){
     bool existe = false;
-    Celda * posElemento = 0;
-    if( primera && elemento == primera->elemento ){
-      existe = true;
+    Celda * ref = primera;
+	while (ref && !existe){
+		if(ref->elemento == elemento){
+			existe = true;
+		}
+		ref = ref->siguiente;
+	}
+	if(!existe){
+		Celda * nueva = new Celda(elemento);
+		if(!vacia()){
+			Celda * actual = primera;
+			if(primera->elemento < elemento){ //error
+				if(primera->siguiente){	
+					while(actual->siguiente && actual->siguiente->elemento < elemento){
+						actual = actual->siguiente;
+					}
+					if(actual->siguiente){	
+						nueva->siguiente = actual->siguiente;
+						actual->siguiente = nueva;
+					}
+					else{
+						actual->siguiente = nueva;
+						ultima = nueva;
+					}
+				}
+				else{
+					primera->siguiente = nueva;
+				}
+			}
+			else{
+				nueva->siguiente = primera;
+				primera = nueva;
+			}
+		}
+		else{
+			primera = nueva;
+			ultima = nueva;
+			numElementos++;
+		}
     }
-    else if(ultima && elemento>ultima->elemento){
-      Celda * nueva = new Celda(elemento);
-      ultima->siguiente = ultima;
-      ultima = nueva;
-      existe = true;
-      ++numElementos;
+	else{
+		cout<<"El elemento ya existe"<<endl;
     }
-    else if(primera && elemento < primera->elemento){
-      Celda * nueva = new Celda(elemento);
-      nueva->siguiente = primera;
-      primera = nueva;
-      existe = true;
-      ++numElementos;
-    }
-    else if(!existe && primera && elemento > primera->elemento){
-      Celda * actual = primera;
-      Celda * anterior = 0;
-      while(actual->siguiente && !existe){
-        anterior = actual;
-        if(anterior->elemento < elemento && elemento < actual->siguiente->elemento ){
-          Celda * nueva = new Celda(elemento);
-          anterior->siguiente = nueva;
-          anterior->siguiente->siguiente = actual->siguiente;
-          existe = true;
-          ++numElementos;
-         }
-        actual = actual->siguiente;
-      }
-    }
+		
 }
-
 
 
 //Efecto: Elimina el elemento recibido como parámetro de la lista. A su vez decrementa el tamaño de la lista en uno.
@@ -148,20 +157,20 @@ int ListaOrdenada::ultimo(){
 //Requiere: Una lista inicializada y que el elemento siguiente al recibido exista.
 //Modifica: Este operador no realiza modificaciones.
 int ListaOrdenada::siguiente(int elemento){
-  Celda* actual = 0;
-  Celda* siguiente = 0;
-  bool encontrado = false;
-	if (ultima && elemento != ultima->elemento) {
-    actual = primera;
-		while (actual->siguiente && !encontrado){
+	Celda* actual = primera;
+	bool continuar = true;
+	int elSiguiente = -1;
+	while(continuar && actual){
+		if(actual->elemento == elemento){
+			continuar = false;
+			elSiguiente = actual->elemento;
+		}
+		if(actual->siguiente){
 			actual = actual->siguiente;
-      if(actual->siguiente->elemento == elemento){
-        siguiente = actual->siguiente;
-        encontrado = true;
-      }
 		}
 	}
-	return siguiente->elemento;
+	
+	return actual->elemento;
 }
 
 //Efecto: Retorna el elemento siguiente del elemento recibido como parámetro.
@@ -197,6 +206,16 @@ int ListaOrdenada::numElem(){
   return cont;
 }
 
-char* ListaOrdenada::getNombre() {
+char* ListaOrdenada::getId() {
 	return (char*)"L.S.E.";
+}
+
+void ListaOrdenada::imprimir(){
+    Celda * actual = primera;
+    while(actual){
+        cout << actual->elemento << "\t";
+        actual = actual->siguiente;
+    }
+	cout<<endl;
+	
 }
