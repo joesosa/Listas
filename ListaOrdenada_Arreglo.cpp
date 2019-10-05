@@ -1,4 +1,4 @@
-#include "ListaOrdenada_Arreglo.h"
+#include "ListaOrdenadaArreglo.h"
 #define ESPACIO 20
 
 
@@ -138,6 +138,14 @@ int ListaOrdenada::numElem(){
     return ultimoLleno+1;
 }
 
-char* ListaOrdenada::getNombre() {
-	return (char*)"Arreglo";
+char* getNombre() {
+	return "Arreglo";
+}
+
+
+void ListaOrdenada::imprimir(){
+    for(int i = 0; i <= ultimoLleno; ++i){
+        cout << listaO[i]<<"\t";
+    }
+	cout << endl;
 }
