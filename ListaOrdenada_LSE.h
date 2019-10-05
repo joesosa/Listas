@@ -11,10 +11,10 @@ class ListaOrdenada {
     	int numElementos;
      	class Celda{
         	public:
-               		int elemento;
-           		Celda * siguiente;
-           		Celda(int);
-           		~Celda();
+               	int elemento;
+           	Celda * siguiente;
+           	Celda(int);
+           	~Celda();
       	};
 	public:
 		ListaOrdenada(); //Iniciar(L)
@@ -28,6 +28,7 @@ class ListaOrdenada {
     		int siguiente(int); // Siguiente(e,L)
     		int anterior(int); // Anterior(e,L)
 		int numElem(); //NumElem(L)
-		char* getNombre();
+		char* getId();
+		void imprimir();
 };
 #endif
