@@ -22,13 +22,13 @@ class ListaOrdenada {
 		void vaciar(); //Vaciar(L)
 		bool vacia(); //Vacia(L)
 		void insertar(int); //Insertar(e,L)
-    		void borrar(int); //Borrar(e,L)
-    		int primero(); // Primero(L)
-    		int ultimo(); // Ultimo(L)
-    		int siguiente(int); // Siguiente(e,L)
-    		int anterior(int); // Anterior(e,L)
+    	void borrar(int); //Borrar(e,L)
+    	int primero(); // Primero(L)
+    	int ultimo(); // Ultimo(L)
+    	int siguiente(int); // Siguiente(e,L)
+    	int anterior(int); // Anterior(e,L)
 		int numElem(); //NumElem(L)
-		char* getId();
+		char* getNombre();
 		void imprimir();
 };
 #endif

@@ -1,4 +1,4 @@
-#include "ListaOrdenadaArreglo.h"
+#include "ListaOrdenada_Arreglo.h"
 #define ESPACIO 20
 
 
@@ -37,38 +37,34 @@ bool ListaOrdenada::vacia(){
 //Aumenta el tamaño en uno.
 //Requiere: Una lista inicializada y un elemento no existente.
 //Modifica: Modifica la lista.
-void ListaOrdenada::insertar(int elemento){
-    bool existe = false;
-    int posElemento = 0;
-    int indice = 1;
-    if( ultimoLleno!=-1 && elemento == listaO[0] ){
-      existe = true;
-    }
-    else if(ultimoLleno!=-1 && elemento>listaO[ultimoLleno]){
-      listaO[++ultimoLleno] = elemento;
-      existe = true;
-    }
-    else if(ultimoLleno!= -1 && elemento > listaO[0]){
-        while (!existe && indice<=ultimoLleno ) {
-          if(listaO[indice] == elemento){
-            existe = true;
-          }
-          if(elemento > listaO[indice -1] && elemento < listaO[indice]){
-            posElemento = indice;
-          }
-          ++indice;
-        }
+void ListaOrdenada::insertar (int elemento){
+  if(ultimoLleno != -1){
+    int existe = 0;   
+    for(int i = 0; i <= ultimoLleno; ++i){
+      if(elemento == listaO[i]){
+        existe = 1;
+       // cout << "ya existe" << listaO[i];
+      }
     }
     if(!existe){
-        if(posElemento == 0){
-          primera = elemento;
-        }
-        for(int i = ultimoLleno; i >= indice; --i){
-            listaO[i+1] = listaO[i];
-        }
-        listaO[indice] = elemento;
-        ++ultimoLleno;
+      int pos = 0;
+      while (elemento > listaO[pos]  && pos <= ultimoLleno){
+        pos++;
+      }
+      cout<<elemento<<"en: "<<pos<<endl;
+      for(int i = ultimoLleno; i >= pos; --i){
+          listaO[i+1] = listaO[i]; 
+      }
+      listaO[pos] = elemento;
+      ++ultimoLleno;
     }
+
+  }
+  else{
+    listaO[0] = elemento;
+    ++ultimoLleno;
+  }
+
 }
 
 
@@ -95,7 +91,7 @@ void ListaOrdenada::borrar(int elemento){
 //Requiere: Una lista inicializada y una lista no vacía.
 //Modifica: Este operador no realiza modificaciones.
 int ListaOrdenada::primero(){
-  return primera;
+  return listaO[0];
 }
 
 //Efecto: Retorna el último elemento de la lista ordenada.
@@ -138,12 +134,13 @@ int ListaOrdenada::numElem(){
     return ultimoLleno+1;
 }
 
-char* getNombre() {
-	return "Arreglo";
+char* ListaOrdenada::getNombre() {
+	return (char*)"Arreglo";
 }
 
 
 void ListaOrdenada::imprimir(){
+	cout << "\n\n";
     for(int i = 0; i <= ultimoLleno; ++i){
         cout << listaO[i]<<"\t";
     }

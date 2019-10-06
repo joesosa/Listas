@@ -7,7 +7,6 @@ using namespace std;
 
 class ListaPos {
     class Celda;    // Prototipo
-	typedef Celda* posicion;
 	
     private:
         Celda * primera;
@@ -22,6 +21,7 @@ class ListaPos {
   			    ~Celda();
 	     };
 	public:
+		typedef Celda* posicion;
 		ListaPos(); //Iniciar(L)
 		~ListaPos(); //Destruir(L)
 		void vaciar(); //Vaciar(L)

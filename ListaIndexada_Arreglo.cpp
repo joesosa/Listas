@@ -81,6 +81,7 @@ int ListaInd::numElem(){
 } 
 
 void ListaInd::imprimir(){
+	cout << "\n\n";
     for(int i = 0; i <= ultimoLleno; ++i){
         cout << listaI[i]<<"\t";
     }

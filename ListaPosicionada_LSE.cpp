@@ -25,6 +25,8 @@ void ListaPos::vaciar() { //Vaciar(L)
 	if (primera)
 		delete primera;
 	ultima = NULL;
+	primera = NULL;
+	numElementos = 0;
 }
 
 bool ListaPos::vacia() {//Vacia(L)
@@ -33,7 +35,11 @@ bool ListaPos::vacia() {//Vacia(L)
 
 void ListaPos::insertar(int elem, posicion pos) { //Insertar(e,p,L)
 	Celda* nueva = new Celda(elem);
-	if (pos == primera) {
+	if (!primera) {
+		primera = nueva;
+		ultima = nueva;
+	}
+	else if (pos == primera) {
 		nueva->siguiente = primera;
 		primera = nueva;
 	}
@@ -124,12 +130,13 @@ ListaPos::posicion ListaPos::anterior(posicion pos) { //Anterior(p,L)
 	return actual;
 }
 
-char* getNombre() {
+char* ListaPos::getNombre() {
 	return (char*)"L.S.E.";
 }
 
-void ListaInd::imprimir(){
+void ListaPos::imprimir(){
     Celda * actual = primera;
+	cout << "\n\n";
     while(actual){
         cout << actual->elemento << "\t";
         actual = actual->siguiente;

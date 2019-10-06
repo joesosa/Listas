@@ -7,13 +7,13 @@ using namespace std;
 
 class ListaPos {
     class Celda;    // Prototipo
-	typedef int posicion;
 	
 	private:
 		int* vListaPos; 
 		int ultimoLleno;
 		
 	public:
+		typedef int posicion;
 		ListaPos(); //Iniciar(L)
 		~ListaPos(); //Destruir(L)
 		void vaciar(); //Vaciar(L)

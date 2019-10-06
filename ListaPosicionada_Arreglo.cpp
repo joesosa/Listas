@@ -54,15 +54,15 @@ int ListaPos::numElem(){ //NumElem(L)
 }
 
 ListaPos::posicion ListaPos::getPrimera(){ //Primera(L)
-	return vListaPos[0];
+	return 0;
 }
 
 ListaPos::posicion ListaPos::getUltima(){ //Ultima(L)
-	return vListaPos[ultimoLleno];
+	return ultimoLleno;
 }
 
 ListaPos::posicion ListaPos::siguiente(posicion pos){ //Siguiente(p,L)
-	return (pos!=ultimoLleno)? pos+1 : -1;
+	return (pos<ultimoLleno && pos>-1)? pos+1 : -1;
 }
 
 ListaPos::posicion ListaPos::anterior(posicion pos){ //Anterior(p,L)
@@ -73,9 +73,10 @@ char* ListaPos::getNombre() {
 	return (char*)"Arreglo";
 }
 
-void ListaInd::imprimir(){
+void ListaPos::imprimir(){
+	cout << "\n\n";
     for(int i = 0; i <= ultimoLleno; ++i){
-        cout << listaI[i]<<"\t";
+        cout << vListaPos[i]<<"\t";
     }
 	cout << endl;
 }

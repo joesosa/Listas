@@ -1,6 +1,5 @@
 #include "ListaOrdenada_LSE.h"
 
-
 ListaOrdenada::Celda::Celda(int elemento){
     this->elemento = elemento;
     siguiente = 0;
@@ -11,7 +10,6 @@ ListaOrdenada::Celda::~Celda(){
         delete siguiente;
     }
 }
-
 
 //Efecto: Inicializa la lista dejándola accesible para que el resto de operadores básicos puedan trabajar en ella.
 //Requiere: Este operador no tiene requerimientos.
@@ -26,9 +24,8 @@ ListaOrdenada::ListaOrdenada(){
 //Requiere: Una lista inicializada.
 //Modifica: Modifica la lista.
 ListaOrdenada::~ListaOrdenada(){
-  if(primera){
-     delete primera;
- }
+	vaciar();
+	delete this;
 }
 
 //Efecto: Edita la lista indexada de modo que termine con 0 elementos.
@@ -38,6 +35,9 @@ void ListaOrdenada::vaciar(){
   if(primera){
       delete primera;
   }
+  primera = 0;
+  ultima = 0;
+  numElementos = 0;
 }
 
 //Efecto: Devuelve un valor de verdad (verdadero o falso) acorde al estado de la lista recibida.
@@ -206,12 +206,13 @@ int ListaOrdenada::numElem(){
   return cont;
 }
 
-char* ListaOrdenada::getId() {
+char* ListaOrdenada::getNombre() {
 	return (char*)"L.S.E.";
 }
 
 void ListaOrdenada::imprimir(){
     Celda * actual = primera;
+	cout << "\n\n";
     while(actual){
         cout << actual->elemento << "\t";
         actual = actual->siguiente;

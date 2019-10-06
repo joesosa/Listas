@@ -159,6 +159,7 @@ int ListaInd::numElem(){
 
 void ListaInd::imprimir(){
     Celda * actual = primera;
+	cout << "\n\n";
     while(actual){
         cout << actual->elemento << "\t";
         actual = actual->siguiente;
