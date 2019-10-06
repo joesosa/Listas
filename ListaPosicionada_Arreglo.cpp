@@ -72,3 +72,10 @@ ListaPos::posicion ListaPos::anterior(posicion pos){ //Anterior(p,L)
 char* ListaPos::getNombre() {
 	return (char*)"Arreglo";
 }
+
+void ListaInd::imprimir(){
+    for(int i = 0; i <= ultimoLleno; ++i){
+        cout << listaI[i]<<"\t";
+    }
+	cout << endl;
+}
