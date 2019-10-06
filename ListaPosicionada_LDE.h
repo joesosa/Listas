@@ -39,5 +39,6 @@ class ListaPos {
 		posicion siguiente(posicion); //Siguiente(p,L)
 		posicion anterior(posicion); //Anterior(p,L)
 		char* getNombre();
+		void imprimir();
 };
 #endif
