@@ -121,3 +121,13 @@ ListaPos::posicion ListaPos::anterior(posicion pos) { //Anterior(p,L)
 char* getNombre() {
 	return (char*)"L.D.E.";
 }
+
+void ListaInd::imprimir(){
+    Celda * actual = primera;
+    while(actual){
+        cout << actual->elemento << "\t";
+        actual = actual->siguiente;
+    }
+	cout<<endl;
+
+}
