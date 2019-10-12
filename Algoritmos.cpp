@@ -49,8 +49,10 @@ ListaOrdenada& union(ListaOrdenada& lista1, ListaOrdenada& lista2) {
 				listaUnion.insertar(actualL1);
 				actualL2 = lista2.ultimo();
 			}
-			actualL2 = lista2.siguiente(actualL2);
-		}
+			else {
+				actualL2 = lista2.siguiente(actualL2);
+			}
+			
 		actualL1 = lista1.siguiente(actualL1);
 	}
 	return listaUnion;
