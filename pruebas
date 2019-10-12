@@ -1,0 +1,76 @@
+#include "ListaOrdenada_Arreglo.h"
+
+void copiar(ListaOrdenada& listaOriginal, ListaOrdenada& listaNueva) {
+	int actual = listaOriginal.primero();
+	int cont = 1;
+	while (cont <= listaOriginal.numElem()) {
+		listaNueva.insertar(actual);
+		actual = listaOriginal.siguiente(actual);
+		cont++;
+	}
+}
+
+bool pertenece(ListaOrdenada& lista, int elemento) {
+	bool pertenece = false;
+	int actual = lista.primero();
+	int cont = 0;
+	while (cont <= lista.numElem() && !pertenece){
+		if (elemento == actual) {
+			pertenece = true;
+		}
+		actual = lista.siguiente(actual);
+	}
+	return pertenece;
+}
+
+ListaOrdenada unionListas(ListaOrdenada& lista1, ListaOrdenada& lista2) {
+	ListaOrdenada listaUnion;
+	int actualL1= lista1.primero();
+	int contadorL1 = 1;
+	while (contadorL1 <= lista1.numElem()) {
+		int contadorL2 = 1;
+		int actualL2 = lista2.primero();
+		while (contadorL2 <= lista2.numElem()) {
+			if (actualL1 == actualL2) {
+				listaUnion.insertar(actualL1);
+				actualL2 = lista2.ultimo();
+			}
+			else {
+				actualL2 = lista2.siguiente(actualL2);
+			}
+		}
+		actualL1 = lista1.siguiente(actualL1);
+	}
+	return listaUnion;
+}
+
+int main(){
+	ListaOrdenada lista;
+	
+	lista.insertar(1);
+	lista.insertar(5);
+	lista.insertar(9);
+	lista.insertar(3);
+	lista.imprimir();
+	
+	if(pertenece(lista, 9)){
+		cout << "hola" << endl;
+	}
+	
+	ListaOrdenada lista2;
+	copiar(lista, lista2);
+	lista2.imprimir();	
+	
+	
+	ListaOrdenada lista3;
+	
+	lista3.insertar(1);
+	lista3.insertar(9);
+	lista3.imprimir();
+	
+	//ListaOrdenada l4 = unionListas(lista3, lista);
+	//l4.imprimir();
+	
+	
+	return 0;
+}
