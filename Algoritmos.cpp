@@ -40,7 +40,6 @@ bool pertenece(ListaOrdenada& lista, int elemento) {
 ListaOrdenada& union(ListaOrdenada& lista1, ListaOrdenada& lista2) {
 	ListaOrdenada listaUnion;
 	int actualL1= lista1.primero();
-	
 	int contadorL1 = 1;
 	while (contadorL1 <= lista1.numElem()) {
 		int contadorL2 = 1;
