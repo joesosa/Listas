@@ -20,10 +20,10 @@ void copiar(ListaOrdenada& listaOriginal, ListaOrdenada& listaNueva) {
 @Modifica: Este metodo no modifica nada
 */
 bool pertenece(ListaOrdenada& lista, int elemento) {
-	bool perenece = false;
+	bool pertenece = false;
 	int actual = lista.primero();
 	int cont = 0;
-	while (cont <= listaoriginal.numElem() && pertenece){
+	while (cont <= lista.numElem() && !pertenece){
 		if (elemento == actual) {
 			pertenece = true;
 		}
@@ -39,22 +39,26 @@ bool pertenece(ListaOrdenada& lista, int elemento) {
 */
 void unionListas(ListaOrdenada& lista1, ListaOrdenada& lista2, ListaOrdenada& listaUnion) {
 	int actualL1 = lista1.primero();
-	int contadorL1 = 1;
-	while (contadorL1 <= lista1.numElem()) {
-		int contadorL2 = 1;
-		int actualL2 = lista2.primero();
-		while (contadorL2 <= lista2.numElem()) {
-			if (actualL1 == actualL2) {
-				listaUnion.insertar(actualL1);
-				actualL2 = lista2.ultimo();
-			}
-			else {
-				actualL2 = lista2.siguiente(actualL2);
-				
-			}
-			++contadorL2;
-		}
+	int contador = 1;
+	int actualL2 = lista2.primero();
+	
+	while (contador <= lista1.numElem() && contador <= lista2.numElem()){
+		listaUnion.insertar(actualL1);
+		listaUnion.insertar(actualL2);
 		actualL1 = lista1.siguiente(actualL1);
-		++contadorL1;
+		actualL2 = lista2.siguiente(actualL2);
+		++contador;
 	}
+	while(contador <= lista1.numElem()){
+		listaUnion.insertar(actualL1);
+		actualL1 = lista1.siguiente(actualL1);
+		++contador;
+	}
+	
+	while(contador <= lista2.numElem()){
+		listaUnion.insertar(actualL2);
+		actualL2 = lista2.siguiente(actualL2);
+		++contador;
+	} 
+	
 }
