@@ -6,7 +6,7 @@
 void copiar(ListaOrdenada& listaOriginal, ListaOrdenada& listaNueva) {
 	int actual = listaOriginal.primero();
 	int cont = 1;
-	while (cont <= listaoriginal.numElem()) {
+	while (cont <= listaOriginal.numElem()) {
 		listaNueva.insertar(actual);
 		actual = listaOriginal.siguiente(actual);
 		cont++;
@@ -37,9 +37,8 @@ bool pertenece(ListaOrdenada& lista, int elemento) {
 @Requiere: Dos listas no vacias
 @Modifica: Este metodo modifica la nueva lista
 */
-ListaOrdenada& union(ListaOrdenada& lista1, ListaOrdenada& lista2) {
-	ListaOrdenada listaUnion;
-	int actualL1= lista1.primero();
+void unionListas(ListaOrdenada& lista1, ListaOrdenada& lista2, ListaOrdenada& listaUnion) {
+	int actualL1 = lista1.primero();
 	int contadorL1 = 1;
 	while (contadorL1 <= lista1.numElem()) {
 		int contadorL2 = 1;
@@ -51,9 +50,11 @@ ListaOrdenada& union(ListaOrdenada& lista1, ListaOrdenada& lista2) {
 			}
 			else {
 				actualL2 = lista2.siguiente(actualL2);
+				
 			}
-			
+			++contadorL2;
+		}
 		actualL1 = lista1.siguiente(actualL1);
+		++contadorL1;
 	}
-	return listaUnion;
 }
