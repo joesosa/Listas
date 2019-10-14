@@ -1,3 +1,15 @@
+#include <stdlib.h> //Para usar system("cls");
+#include <conio.h> //Para usar getch();
+
+//#include "ListaPosicionada_Arreglo.h"
+#include "ListaPosicionada_LSE.h"
+//#include "ListaPosicionada_LDE.h"
+
+//#include "ListaIndexada_Arreglo.h"
+#include "ListaIndexada_LSE.h"
+
+#include "ListaOrdenada_Arreglo.h"
+//#include "ListaOrdenada_LSE.h"
 /*
 @Efecto: Inserta todos los datos de la lista original en la nueva con el fin de que queden exactamente iguales
 @Requiere: Una lista original no vacia y una lista nueva sin elementos
@@ -62,3 +74,47 @@ void unionListas(ListaOrdenada& lista1, ListaOrdenada& lista2, ListaOrdenada& li
 	} 
 	
 }
+
+/*
+@Efecto: Busca en la lista el elemento recibido como parametro y devuelve si existe o no
+@Requiere: Una lista no vacia y un elemento valido(de tipo) en la lista
+@Modifica: Este metodo no modifica nada
+*/
+bool buscar(ListaPos& lista, int elemento){
+	bool existe = false;
+	ListaPos::posicion pos = lista.getPrimera();
+	while (!existe && pos){
+		if( lista.recuperar(pos) == elemento ){
+			existe = true;
+		}
+		pos = lista.siguiente(pos);
+	}
+	return existe;
+}
+
+bool buscar(ListaInd& lista, int elemento){
+	bool existe = false;
+	int actual = lista.recuperar(0);
+	while (!existe && actual < lista.numElem()){
+		if( lista.recuperar(actual) == elemento ){
+			existe = true;
+		}
+		++actual;
+	}
+	return existe;
+}
+
+
+/*
+@Efecto: Invierte todos los elementos de una lista, de manera en que el ultimo sea el primero y el primero el ultimo y asi respectivamente
+@Requiere: Una lista no vacia y de tamano minimo de dos
+@Modifica: Este metodo modifica la lista
+*/
+void invertir(ListaPos& lista){
+	
+}
+
+void invertir(ListaInd& lista){
+
+}
+
