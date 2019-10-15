@@ -111,10 +111,56 @@ bool buscar(ListaInd& lista, int elemento){
 @Modifica: Este metodo modifica la lista
 */
 void invertir(ListaPos& lista){
-	
+	ListaPos::posicion posI = lista.getPrimera();
+	ListaPos::posicion posF = lista.getUltima();
+	while(posI != posF && lista.siguiente(posI) != posF){ //probar lista.recuperar(posI) != lista.recuperar(posF) && lista.recuperar(lista.siguiente(posI)) != lista.recuperar(posF)
+		lista.intercambiar(posI,posF);
+		posI = lista.siguiente(posI);
+		posF = lista.anterior(posF);
+	}
+	lista.intercambiar(posI,posF);
 }
 
 void invertir(ListaInd& lista){
-
+	int indI = 0;
+	int indF = lista.numElem()-1;
+	while(indI != indF && indI+1 != indF ){
+		lista.intercambiar(indI,indF);
+		++indI;
+		--indF;
+	}
+	lista.intercambiar(indI,indF);
 }
 
+/*
+@Efecto: Averigua si una lista es simetrica verfificando si la primera es igual a la ultima y asi sucesivamente
+@Requiere: Una lista no vacia y de tamano minimo de dos
+@Modifica: Este metodo modifica la lista
+*/
+bool simetrica(ListaPos& lista){
+	ListaPos::posicion posI = lista.getPrimera();
+	ListaPos::posicion posF = lista.getUltima();
+	bool esSimetrica = true;
+	while(esSimetrica && posI != posF && lista.siguiente(posI) != posF) { //probar
+		if(lista.recuperar(posI) != lista.recuperar(posF)){
+			esSimetrica = false;
+		}
+		posI = lista.siguiente(posI);
+		posF = lista.anterior(posF);
+	}
+	return esSimetrica;
+}
+
+bool simetrica(ListaInd& lista){
+	int indI = 0;
+	int indF = lista.numElem()-1;
+	bool esSimetrica = true;
+	while(esSimetrica && indI != indF && indI+1 != indF){
+		if(indI != indF){
+			esSimetrica = false;
+		}
+		++indI;
+		--indF;
+	}
+	return esSimetrica;
+}
