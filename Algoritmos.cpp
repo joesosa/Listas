@@ -164,3 +164,34 @@ bool simetrica(ListaInd& lista){
 	}
 	return esSimetrica;
 }
+
+/*
+@Efecto: Ordena los elementos de la lista en orden ascendente
+@Requiere: Una lista no vacia y de tamano minimo de dos
+@Modifica: Este metodo modifica la lista
+*/
+void seleccionIterativo(ListaPos& lista){
+	ListaPos::posicion posMin;																																												
+	for(ListaPos::posicion i = lista.getPrimera(); i != lista.getUltima(); i = lista.siguiente(i)){
+		posMin = i;
+		for(ListaPos::posicion j = lista.siguiente(i); j != lista.getUltima(); j = lista.siguiente(j){
+			if(lista.recuperar(j) < lista.recuperar(minimo)){
+				min = j;
+			}
+		}
+		lista.intercambiar(i,minimo);
+	}
+}
+
+void seleccionIterativo(ListaInd& lista){
+	int minimo = 0;																																													
+	for(int i = 0; i < lista.numElem() - 1; ++i){
+		minimo = i;
+		for(int j = i+1; j < lista.numElem(); ++j){
+			if(lista.recuperar(j) < lista.recuperar(minimo)){
+				minimo = j;
+			}
+		}
+		lista.intercambiar(i,minimo);
+	}
+}
