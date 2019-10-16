@@ -267,3 +267,84 @@ void burbujaOriginal(ListaInd& lista) {
 	}
 }
 
+/*
+@Efecto: 
+@Requiere: Una lista no vacia y de tamano minimo de dos
+@Modifica: Este metodo modifica la lista
+*/
+//posible error
+void eliminarRepetidos(ListaPos& lista){
+	ListaPos::posicion posI = lista.getPrimera();
+	ListaPos::posicion posJ = posI;
+	for(int i = 0; i < lista.numElem(); ++i){
+		bool repetido = false;
+		for(int j = 0; j < lista.numElem(); ++j){
+			if(i != j && lista.recuperar(posI) == lista.recuperar(posJ) ){
+				repetido = true;
+				j = lista.numElem();
+			}
+			posJ = lista.siguiente(posJ);
+		}
+		if(repetido){
+			lista.borrar(posI);
+		}
+		posI = lista.siguiente(posI);
+	}
+}
+
+void eliminarRepetidos(ListaInd& lista){
+	for(int i = 0; i < lista.numElem(); ++i){
+		bool repetido = false;
+		for(int j = 0; j < lista.numElem(); ++j){
+			if(i != j && lista.recuperar(i) == lista.recuperar(j) ){
+				repetido = true;
+				j = lista.numElem();
+			}
+		}
+		if(repetido){
+			lista.borrar(i);
+		}
+	}
+}
+
+/*
+@Efecto: 
+@Requiere: Una lista no vacia y de tamano minimo de dos
+@Modifica: Este metodo modifica la lista
+*/
+//posible error
+bool subLista(ListaInd& lista1, ListaInd& lista2){
+	int indiceL1 = 0;
+	int indiceL2 = 0;
+	bool esSubLista = false;
+	while(!esSubLista && indiceL2 < lista2.numElem()){
+		int cont = 0;
+		while(!esSubLista && actualL1 < lista1.numElem() && lista1.recuperar(indiceL1) == lista2.(indiceL2) ){
+			++cont;
+			if(cont == lista1.numElem()){
+				esSubLista = true;
+			}
+			++indiceL1;
+			++indiceL2;
+		}
+	}
+	return esSubLista;
+}
+
+bool subLista(ListaInd& lista1, ListaInd& lista2){
+	int indiceL1 = 0;
+	int indiceL2 = 0;
+	bool esSubLista = false;
+	while(!esSubLista && indiceL2 < lista2.numElem()){
+		int cont = 0;
+		while(!esSubLista && actualL1 < lista1.numElem() && lista1.recuperar(indiceL1) == lista2.(indiceL2) ){
+			++cont;
+			if(cont == lista1.numElem()){
+				esSubLista = true;
+			}
+			++indiceL1;
+			++indiceL2;
+		}
+	}
+	return esSubLista;
+}
