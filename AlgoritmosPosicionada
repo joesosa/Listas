@@ -8,8 +8,9 @@ ListaPos::posicion traducir(ListaPos& lista, int indice) { //Traduce un indice i
 
 bool buscar(ListaPos& lista, int elemento){
 	bool existe = false;
+	int cont = 0;
 	ListaPos::posicion pos = lista.getPrimera();
-	while (!existe && pos){ //pos?
+	while (!existe && cont < lista.numElem()){ //pos?
 		if( lista.recuperar(pos) == elemento ){
 			existe = true;
 		}
