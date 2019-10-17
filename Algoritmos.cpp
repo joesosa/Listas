@@ -154,19 +154,21 @@ bool simetrica(ListaPos& lista){
 	return esSimetrica;
 }
 
-bool simetrica(ListaInd& lista) {
+bool simetrica(ListaInd& lista){
 	int indI = 0;
 	int indF = lista.numElem() - 1;
 	bool esSimetrica = true;
-	while (esSimetrica && indI != indF && indI + 1 != indF) {
+	if(lista.numElem() > 1){	
+		while(esSimetrica && indI != indF && indI+1 != indF){
+			if(lista.recuperar(indI) != lista.recuperar(indF)){
+				esSimetrica = false;
+			}
+			++indI;
+			--indF;
+		}
 		if (lista.recuperar(indI) != lista.recuperar(indF)) {
 			esSimetrica = false;
 		}
-		++indI;
-		--indF;
-	}
-	if (lista.recuperar(indI) != lista.recuperar(indF)) {
-		esSimetrica = false;
 	}
 	return esSimetrica;
 }
