@@ -1,3 +1,4 @@
+#include "ListaPosicionada_Arreglo.h"
 ListaPos::posicion traducir(ListaPos& lista, int indice) { //Traduce un indice ingresado por el usuarion en una posicion
 	ListaPos::posicion pos;
 	pos = lista.getPrimera();
@@ -84,6 +85,7 @@ void seleccionRecursivo(ListaPos& lista, int inicio) {
 	}
 }
 
+
 void burbujaOriginal(ListaPos& lista) { //revisar
 	ListaPos::posicion posI = lista.getPrimera();
 	ListaPos::posicion posJ;
@@ -99,7 +101,6 @@ void burbujaOriginal(ListaPos& lista) { //revisar
 	}
 }
 
-//arreglar
 void eliminarRepetidos(ListaPos& lista){
 	ListaPos::posicion posI = lista.getPrimera();
 	ListaPos::posicion posJ = posI;
