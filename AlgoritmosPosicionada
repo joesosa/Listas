@@ -48,15 +48,19 @@ bool simetrica(ListaPos& lista){
 }
 
 void seleccionIterativo(ListaPos& lista){
-	ListaPos::posicion posMin;																																												
-	for(ListaPos::posicion i = lista.getPrimera(); i != lista.anterior(lista.getUltima()) ; i = lista.siguiente(i) ){
-		posMin = i;
-		for(ListaPos::posicion j = lista.siguiente(i); j != lista.getUltima(); j = lista.siguiente(j) ){
-			if(lista.recuperar(j) < lista.recuperar(posMin)){
-				posMin = j;
-			}
+	ListaPos::posicion posMin;
+	ListaPos::posicion posI = lista.getPrimera();																																												
+	for(int i = 0; i < lista.numElem() -1 ; ++i){
+		ListaPos::posicion posJ = lista.siguiente(posI);
+		posMin = posI;
+		for(int j = i+1 ; j < lista.numElem(); ++j){
+			if(lista.recuperar(posJ) < lista.recuperar(posMin)){
+				posMin = posJ;
+			} 
+			posJ = lista.siguiente(posJ);
 		}
-		lista.intercambiar(i,posMin);
+		lista.intercambiar(posI,posMin);
+		posI = lista.siguiente(posI);
 	}
 }
 
