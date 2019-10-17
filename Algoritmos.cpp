@@ -339,13 +339,17 @@ bool subLista(ListaInd& lista1, ListaInd& lista2){
 	bool esSubLista = false;
 	while(!esSubLista && indiceL2 < lista2.numElem()){
 		int cont = 0;
-		while(!esSubLista && actualL1 < lista1.numElem() && lista1.recuperar(indiceL1) == lista2.(indiceL2) ){
+		while(!esSubLista && indiceL1 < lista1.numElem() && lista1.recuperar(indiceL1) == lista2.recuperar(indiceL2) ){
 			++cont;
 			if(cont == lista1.numElem()){
 				esSubLista = true;
 			}
 			++indiceL1;
 			++indiceL2;
+		}
+		indiceL1 = 0;
+		if(lista1.recuperar(indiceL1) != lista2.recuperar(indiceL2)){
+				++indiceL2;
 		}
 	}
 	return esSubLista;
