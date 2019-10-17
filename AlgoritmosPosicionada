@@ -65,18 +65,21 @@ void seleccionIterativo(ListaPos& lista){
 }
 
 void seleccionRecursivo(ListaPos& lista, int inicio) {
-	ListaPos::posicion i = traducir(lista, inicio);
-	if (i == lista.getUltima()) {
+	if (inicio == lista.numElem() -1) {
 		return;
 	}
 	else {
-		ListaPos::posicion minimo = i;
-		for (i = lista.siguiente(lista.getPrimera()); i != lista.siguiente(lista.getUltima()); i = lista.siguiente(i)) {
-			if (lista.recuperar(i) < lista.recuperar(minimo)) {
-				minimo = i;
+		ListaPos::posicion posI = traducir(lista, inicio);
+		ListaPos::posicion minimo = posI;
+		ListaPos::posicion posActual = posI;
+		posI = lista.siguiente(posI);
+		for (int i = inicio + 1; i <= lista.numElem(); ++i) {
+			if (lista.recuperar(posI) < lista.recuperar(minimo)) {
+				minimo = posI;
 			}
+			posI = lista.siguiente(posI);
 		}
-		lista.intercambiar(inicio, minimo);
+		lista.intercambiar(posActual, minimo);
 		seleccionRecursivo(lista, ++inicio);
 	}
 }
