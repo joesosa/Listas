@@ -1,0 +1,106 @@
+ListaPos::posicion traducir(ListaPos& lista, int indice) { //Traduce un indice ingresado por el usuarion en una posicion
+	ListaPos::posicion pos;
+	pos = lista.getPrimera();
+	for (int i = 1; i < indice; ++i)
+		pos = lista.siguiente(pos);
+	return pos;
+}
+
+bool buscar(ListaPos& lista, int elemento){
+	bool existe = false;
+	ListaPos::posicion pos = lista.getPrimera();
+	while (!existe && pos){ //pos?
+		if( lista.recuperar(pos) == elemento ){
+			existe = true;
+		}
+		pos = lista.siguiente(pos);
+	}
+	return existe;
+}
+
+void invertir(ListaPos& lista){
+	ListaPos::posicion posI = lista.getPrimera();
+	ListaPos::posicion posF = lista.getUltima();
+	while(posI != posF && lista.siguiente(posI) != posF){ //probar lista.recuperar(posI) != lista.recuperar(posF) && lista.recuperar(lista.siguiente(posI)) != lista.recuperar(posF)
+		lista.intercambiar(posI,posF);
+		posI = lista.siguiente(posI);
+		posF = lista.anterior(posF);
+	}
+	lista.intercambiar(posI,posF);
+}
+
+bool simetrica(ListaPos& lista){
+	ListaPos::posicion posI = lista.getPrimera();
+	ListaPos::posicion posF = lista.getUltima();
+	bool esSimetrica = true;
+	while(esSimetrica && posI != posF && lista.siguiente(posI) != posF) { //probar
+		if(lista.recuperar(posI) != lista.recuperar(posF)){
+			esSimetrica = false;
+		}
+		posI = lista.siguiente(posI);
+		posF = lista.anterior(posF);
+	}
+	if (lista.recuperar(posI) != lista.recuperar(posF)) {
+		esSimetrica = false;
+	}
+	return esSimetrica;
+}
+
+void seleccionIterativo(ListaPos& lista){
+	ListaPos::posicion posMin;																																												
+	for(ListaPos::posicion i = lista.getPrimera(); i != lista.anterior(lista.getUltima()) ; i = lista.siguiente(i) ){
+		posMin = i;
+		for(ListaPos::posicion j = lista.siguiente(i); j != lista.getUltima(); j = lista.siguiente(j) ){
+			if(lista.recuperar(j) < lista.recuperar(posMin)){
+				posMin = j;
+			}
+		}
+		lista.intercambiar(i,posMin);
+	}
+}
+
+void seleccionRecursivo(ListaPos& lista, int inicio) {
+	ListaPos::posicion i = traducir(lista, inicio);
+	if (i == lista.getUltima()) {
+		return;
+	}
+	else {
+		ListaPos::posicion minimo = i;
+		for (i = lista.siguiente(lista.getPrimera()); i != lista.siguiente(lista.getUltima()); i = lista.siguiente(i)) {
+			if (lista.recuperar(i) < lista.recuperar(minimo)) {
+				minimo = i;
+			}
+		}
+		lista.intercambiar(inicio, minimo);
+		seleccionRecursivo(lista, ++inicio);
+	}
+}
+
+void burbujaOriginal(ListaPos& lista) { //revisar
+	for (ListaPos::posicion i = lista.getPrimera(); i != lista.anterior(lista.getUltima()); i = lista.siguiente(i)) {
+		for (ListaPos::posicion j = lista.getPrimera(); ; j = lista.siguiente(j)) { //solucionar error
+			if (lista.recuperar(j) < lista.recuperar(lista.siguiente(j))) {
+				lista.intercambiar(lista.siguiente(j) , j);
+			}
+		}
+	}
+}
+
+void eliminarRepetidos(ListaPos& lista){
+	ListaPos::posicion posI = lista.getPrimera();
+	ListaPos::posicion posJ = posI;
+	for(int i = 0; i < lista.numElem(); ++i){
+		bool repetido = false;
+		for(int j = 0; j < lista.numElem(); ++j){
+			if(i != j && lista.recuperar(posI) == lista.recuperar(posJ) ){
+				repetido = true;
+				j = lista.numElem();
+			}
+			posJ = lista.siguiente(posJ);
+		}
+		if(repetido){
+			lista.borrar(posI);
+		}
+		posI = lista.siguiente(posI);
+	}
+}
