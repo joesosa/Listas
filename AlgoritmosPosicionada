@@ -85,15 +85,21 @@ void seleccionRecursivo(ListaPos& lista, int inicio) {
 }
 
 void burbujaOriginal(ListaPos& lista) { //revisar
-	for (ListaPos::posicion i = lista.getPrimera(); i != lista.anterior(lista.getUltima()); i = lista.siguiente(i)) {
-		for (ListaPos::posicion j = lista.getPrimera(); ; j = lista.siguiente(j)) { //solucionar error
-			if (lista.recuperar(j) < lista.recuperar(lista.siguiente(j))) {
-				lista.intercambiar(lista.siguiente(j) , j);
+	ListaPos::posicion posI = lista.getPrimera();
+	ListaPos::posicion posJ;
+	for (int i = 0; i < lista.numElem() - 1; ++i) {
+		posJ = lista.getPrimera();
+		for (int j = 0; j < lista.numElem() - i - 1; ++j) { //solucionar error
+			if (lista.recuperar(posJ) > lista.recuperar(lista.siguiente(posJ)) ) {
+				lista.intercambiar(lista.siguiente(posJ) , posJ);
 			}
+			posJ = lista.siguiente(posJ);
 		}
+		posI = lista.siguiente(posI);
 	}
 }
 
+//arreglar
 void eliminarRepetidos(ListaPos& lista){
 	ListaPos::posicion posI = lista.getPrimera();
 	ListaPos::posicion posJ = posI;
