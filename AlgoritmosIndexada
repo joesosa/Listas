@@ -20,7 +20,8 @@
 bool buscar(ListaInd& lista, int elemento){
 	bool existe = false;
 	int actual = 0;
-	while (!existe && actual < lista.numElem()){
+	int cantElem = lista.numElem();
+	while (!existe && actual < cantElem){
 		if( lista.recuperar(actual) == elemento ){
 			existe = true;
 		}
