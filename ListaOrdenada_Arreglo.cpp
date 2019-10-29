@@ -39,7 +39,7 @@ bool ListaOrdenada::vacia(){
 //Modifica: Modifica la lista.
 void ListaOrdenada::insertar (int elemento){
   if(ultimoLleno != -1){
-    int existe = 0;   
+    int existe = 0;
     for(int i = 0; i <= ultimoLleno; ++i){
       if(elemento == listaO[i]){
         existe = 1;
@@ -51,9 +51,9 @@ void ListaOrdenada::insertar (int elemento){
       while (elemento > listaO[pos]  && pos <= ultimoLleno){
         pos++;
       }
-      cout<<elemento<<"en: "<<pos<<endl;
+      
       for(int i = ultimoLleno; i >= pos; --i){
-          listaO[i+1] = listaO[i]; 
+          listaO[i+1] = listaO[i];
       }
       listaO[pos] = elemento;
       ++ultimoLleno;
@@ -140,9 +140,9 @@ char* ListaOrdenada::getNombre() {
 
 
 void ListaOrdenada::imprimir(){
-	cout << "\n\n";
+	cout << "\n";
     for(int i = 0; i <= ultimoLleno; ++i){
-        cout << listaO[i]<<"\t";
+        cout << listaO[i]<<" , ";
     }
 	cout << endl;
 }

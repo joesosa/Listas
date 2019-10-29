@@ -15,16 +15,16 @@ ListaInd::~ListaInd(){
 
 void ListaInd::vaciar(){
     ultimoLleno = -1;
-} 
+}
 
 bool ListaInd::vacia(){
     return ultimoLleno == -1;
 }
 
-void ListaInd::insertar(int elemento, int indice){ 
-    if(indice >= 0 && indice <= ultimoLleno+1){  
+void ListaInd::insertar(int elemento, int indice){
+    if(indice >= 0 && indice <= ultimoLleno+1){
         for(int i = ultimoLleno; i >= indice; --i){
-            listaI[i+1] = listaI[i]; 
+            listaI[i+1] = listaI[i];
         }
         listaI[indice] = elemento;
         ++ultimoLleno;
@@ -69,7 +69,7 @@ void ListaInd::intercambiar(int indice1,int indice2){
     if(indice1 >= 0 && indice1 <= ultimoLleno && indice2 >= 0 && indice2 <= ultimoLleno){
         int aux = listaI[indice1];
         listaI[indice1] = listaI[indice2];
-        listaI[indice2] = aux; 
+        listaI[indice2] = aux;
     }
     else{
         cout << "No existe el elemento en la lista"<<endl;
@@ -78,12 +78,12 @@ void ListaInd::intercambiar(int indice1,int indice2){
 
 int ListaInd::numElem(){
     return ultimoLleno +1;
-} 
+}
 
 void ListaInd::imprimir(){
-	cout << "\n\n";
+	cout << "\n";
     for(int i = 0; i <= ultimoLleno; ++i){
-        cout << listaI[i]<<"\t";
+        cout << listaI[i]<<" , ";
     }
 	cout << endl;
 }

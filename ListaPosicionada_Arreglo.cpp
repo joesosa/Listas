@@ -3,7 +3,7 @@
 ListaPos::ListaPos(){ //Iniciar(L)
 	vListaPos = new int[20];
 	ultimoLleno = -1;
-}	
+}
 
 ListaPos::~ListaPos(){
 	delete vListaPos;	//Destruir(L)
@@ -15,7 +15,7 @@ void ListaPos::vaciar(){ //Vaciar(L)
 }
 
 bool ListaPos::vacia(){ //Vacia(L)
-	return (ultimoLleno == -1); 
+	return (ultimoLleno == -1);
 }
 
 void ListaPos::insertar(int elem, posicion pos){ //Insertar(e,p,L)
@@ -74,7 +74,7 @@ char* ListaPos::getNombre() {
 }
 
 void ListaPos::imprimir(){
-	cout << "\n\n";
+	cout << "\n";
     for(int i = 0; i <= ultimoLleno; ++i){
         cout << vListaPos[i]<<"\t";
     }
