@@ -20,7 +20,6 @@ ListaPos::ListaPos() { //Iniciar(L)
 
 ListaPos::~ListaPos() { //Destruir(L)
 	vaciar();
-	delete this;
 }
 
 void ListaPos::vaciar() { //Vaciar(L)
