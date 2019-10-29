@@ -1,0 +1,115 @@
+#include "ListaIndexada_Arreglo.h"
+
+void eliminarRepetidos(ListaInd& lista){
+	for(int i = 0; i < lista.numElem(); ++i){
+		bool repetido = false;
+		for(int j = 0; j < lista.numElem(); ++j){
+			if(i != j && lista.recuperar(i) == lista.recuperar(j) ){
+				repetido = true;
+				j = lista.numElem();
+			}
+		}
+		if(repetido){
+			lista.borrar(i);
+		}
+	}
+}
+
+bool buscar(ListaInd& lista, int elemento){
+	bool existe = false;
+	int actual = 0;
+	while (!existe && actual < lista.numElem()){
+		if( lista.recuperar(actual) == elemento ){
+			existe = true;
+		}
+		++actual;
+	}
+	return existe;
+}
+
+void invertir(ListaInd& lista){
+	int indI = 0;
+	int indF = lista.numElem()-1;
+	while(indI != indF && indI+1 != indF ){
+		lista.intercambiar(indI,indF);
+		++indI;
+		--indF;
+	}
+	lista.intercambiar(indI,indF);
+}
+
+bool simetrica(ListaInd& lista){
+	int indI = 0;
+	int indF = lista.numElem() - 1;
+	bool esSimetrica = true;
+	if(lista.numElem() > 1){	
+		while(esSimetrica && indI != indF && indI+1 != indF){
+			if(lista.recuperar(indI) != lista.recuperar(indF)){
+				esSimetrica = false;
+			}
+			++indI;
+			--indF;
+		}
+		if (lista.recuperar(indI) != lista.recuperar(indF)) {
+			esSimetrica = false;
+		}
+	}
+	return esSimetrica;
+}
+
+void seleccionIterativo(ListaInd& lista){
+	int minimo = 0;																																													
+	for(int i = 0; i < lista.numElem() - 1; ++i){
+		minimo = i;
+		for(int j = i+1; j < lista.numElem(); ++j){
+			if(lista.recuperar(j) < lista.recuperar(minimo)){
+				minimo = j;
+			}
+		}
+		lista.intercambiar(i,minimo);
+	}
+}
+
+void seleccionRecursivo(ListaInd& lista, int inicio) {
+	if (inicio == lista.numElem() - 1) {
+		return;
+	}
+	else {
+		int minimo = inicio;
+		for (int i = inicio + 1; i < lista.numElem(); ++i) {
+			if (lista.recuperar(i) < lista.recuperar(minimo)) {
+				minimo = i;
+			}
+		}
+		lista.intercambiar(inicio, minimo);
+		seleccionRecursivo(lista, ++inicio);
+	}
+}
+
+
+void burbujaOriginal(ListaInd& lista) {
+	for (int i = 0; i < lista.numElem() - 1; ++i) {
+		for (int j = 0; j < lista.numElem() - i - 1; ++j ) {
+			if (lista.recuperar(j) > lista.recuperar(j+1)) {
+				lista.intercambiar(j+1, j);
+			}
+		}
+	}
+}
+
+
+
+int main(){
+	ListaInd lista;
+	lista.insertar(1,0);
+	lista.insertar(2,1);
+	lista.insertar(3,2);
+	lista.insertar(10,3);
+	lista.insertar(3,4);
+	lista.insertar(2,5);
+	lista.insertar(1,6);
+	lista.imprimir();
+	eliminarRepetidos(lista);
+	lista.imprimir();
+	return 0;
+}
