@@ -3,6 +3,11 @@
 #include <string>
 using namespace std;
 
+/*
+@Efectua: Ordena ascendentemente los elementos en una lista usando el algoritmo de ShakeSort
+@Requiere: Una lista lista inicializada, no vacia sin elementos repetidos
+@Modifica: La posicion de los elementos en la lista
+*/
 void Burbuja_BiDireccional(ListaPos lista) {
 	ListaPos::posicion actual = lista.getPrimera();
 	int numElem = lista.numElem();
@@ -38,6 +43,11 @@ void Burbuja_BiDireccional(ListaPos lista) {
 	}
 }
 
+/*
+@Efectua: Ordena ascendentemente los elementos en una lista usando el algoritmo de insercion
+@Requiere: Una lista inicializada, no vacia sin elementos repetidos
+@Modifica: La posicion de los elementos en la lista
+*/
 void insercionSort(ListaPos lista) {
 	ListaPos::posicion anterior = lista.getPrimera();
 	ListaPos::posicion ultima = lista.getUltima();
@@ -76,6 +86,11 @@ void insercionSort(ListaPos lista) {
 	}
 }
 
+/*
+@Efectua: Mezcla ordenadamente el contenido de 2 listas y lo retorna en una lista
+@Requiere: l1 y l2 inicializadas, no vacias y sin elementos repetidos
+@Modifica: No modifica las listas recibidas
+*/
 ListaPos merge(ListaPos l1, ListaPos l2) {
 	ListaPos::posicion actualL1 = l1.getPrimera();
 	ListaPos::posicion actualL2 = l2.getPrimera();
@@ -105,6 +120,11 @@ ListaPos merge(ListaPos l1, ListaPos l2) {
 	return l3;
 }
 
+/*
+@Efectua: Ordena ascendentemente los elementos en una lista usando el algoritmo de MergeSort
+@Requiere: Una lista lista inicializada, no vacia sin elementos repetidos, posicion de inicio y final validas dentro de la lista
+@Modifica: La posicion de los elementos en la lista
+*/
 ListaPos mergeSort(ListaPos lista, ListaPos::posicion actualInicio, ListaPos::posicion actualFinal) {
 	ListaPos l = ListaPos();
 	if (actualInicio == actualFinal) {
