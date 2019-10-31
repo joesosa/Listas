@@ -304,3 +304,66 @@ void unionNoOrdenadas(ListaInd& l1, ListaInd& l2){
     }
   }
 }
+
+
+/*
+@Efectua:le agrega a L1 los elementos que están en L2, de manera que en L1 no
+queden elementos repetidos.
+@Requiere: L1 y L2 inicializadas y que sean listas ordenadas y sin elementos repetidos.
+@Modifica:Modifica l1
+*/
+void unionOrdenadas(ListaInd& l1, ListaInd& l2){
+  int actual1 = 0;
+  int elem1 = l1.recuperar(actual1);
+  int actual2 = 0;
+  int elem2 = l2.recuperar(actual2);
+  // Se usan las variables elem1 y elem2 con el fin de no hacer muchos llamados al metodo recuperar(int)
+  int numElemL1= l1.numElem();
+  int numElemL2= l2.numElem();
+  bool end = false;
+  int cantElementosR1 = 1; // Me indica la cantidad de elementos recorridos en l1
+  int cantElementosR2 = 1; // Me indica la cantidad de elementos recorridos en l2
+  while (!end) {
+    if(elem1 == elem2){
+		if(cantElementosR1 < numElemL1){
+			elem1 = l1.recuperar(++actual1);
+		}
+            
+		if(cantElementosR2 < numElemL2){
+			elem2 = l2.recuperar(++actual2);
+		}
+		if(elem2>elem1 && elem1 == l1.recuperar(l1.numElem()-1)){
+			actual1 = l1.numElem();
+			l1.insertar(elem2, actual1);
+		}
+      ++cantElementosR1;
+      ++cantElementosR2;
+    }
+    else{
+      if (elem1>elem2){
+        l1.insertar(elem2,actual1);
+		l1.imprimir();
+        ++actual1;
+		//++cantElementosR1;
+		if(cantElementosR2 < numElemL2){
+			elem2 = l2.recuperar(++actual2);
+		}
+        ++cantElementosR2;
+      }
+      else{
+		if(cantElementosR1 < numElemL1){
+			elem1 = l1.recuperar(++actual1);
+		}
+		else{
+			elem1 = l1.recuperar(l1.numElem() - 1);
+			actual1 = l1.numElem();
+		}
+        ++cantElementosR1;
+      }
+    }
+    if(cantElementosR1 >= numElemL1 && cantElementosR2 >= numElemL2 ){
+      end = true;
+    }
+  }
+  }
+
