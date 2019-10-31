@@ -369,3 +369,50 @@ void unionOrdenadas(ListaInd& l1, ListaInd& l2){
   }
   }
 
+
+int encuentraPivoteAho(ListaInd& l1, int inicial, int final) {
+	int pivoteTemp1 = l1.recuperar(inicial);
+	int indicePivote = -1;
+	bool pivoteEncontrado = false;
+	int contador = inicial;
+	cout << "Pivote\n";
+	l1.imprimir();
+	while (contador <= final && !pivoteEncontrado) {
+		if (pivoteTemp1 > l1.recuperar(contador)) {
+			pivoteEncontrado = true;
+			indicePivote = inicial;
+		}
+		else if (pivoteTemp1 < l1.recuperar(contador)) {
+			pivoteEncontrado = true;
+			indicePivote = contador;
+		}
+		++contador;
+	}
+	return indicePivote;
+}
+
+
+int parteYOrdena(ListaInd& l1, int inicial, int final) {
+	int pivote = l1.recuperar(encuentraPivoteAho(l1, inicial, final));
+	int inicioEMP = -1; // Guarda el indice donde inician los elemento mayores que el pivote
+	while (inicial < final) {
+		cout << "intercambiar\n\n";
+		l1.intercambiar(inicial, final);
+		while (l1.recuperar(inicial) < pivote) {
+			++inicial;
+			inicioEMP = inicial;
+		}
+		while (l1.recuperar(final) >= pivote) {
+			--final;
+		}
+	}
+	return inicioEMP;
+}
+
+void quickSort(ListaInd& l1, int inicial, int final){
+	if (inicial!=final && inicial < final && encuentraPivoteAho(l1,inicial,final)!= -1){
+		int indiceDivisor = parteYOrdena(l1, inicial, final);
+		quickSort(l1, inicial, indiceDivisor-1);
+		quickSort(l1,indiceDivisor,final);
+	}
+}
