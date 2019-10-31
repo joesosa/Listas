@@ -25,7 +25,6 @@ ListaOrdenada::ListaOrdenada(){
 //Modifica: Modifica la lista.
 ListaOrdenada::~ListaOrdenada(){
 	vaciar();
-	delete this;
 }
 
 //Efecto: Edita la lista indexada de modo que termine con 0 elementos.
