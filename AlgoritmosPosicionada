@@ -7,18 +7,7 @@ ListaPos::posicion traducir(ListaPos& lista, int indice) { //Traduce un indice i
 	return pos;
 }
 
-bool buscar(ListaPos& lista, int elemento){
-	bool existe = false;
-	int cont = 0;
-	ListaPos::posicion pos = lista.getPrimera();
-	while (!existe && cont < lista.numElem()){ //pos?
-		if( lista.recuperar(pos) == elemento ){
-			existe = true;
-		}
-		pos = lista.siguiente(pos);
-	}
-	return existe;
-}
+
 
 void invertir(ListaPos& lista){
 	ListaPos::posicion posI = lista.getPrimera();
@@ -119,3 +108,205 @@ void eliminarRepetidos(ListaPos& lista){
 		posI = lista.siguiente(posI);
 	}
 }
+
+
+
+/*
+@Efectua: Busca en la lista el elemento recibido como parametro y devuelve si existe o no
+@Requiere: Una lista no vacia y un elemento valido(de tipo) en la lista
+@Modifica: Este metodo no modifica nada
+*/
+bool buscar(ListaPos& lista, int elemento){
+	bool existe = false;
+	int cont = 0;
+	int numElem = lista.numElem();
+	ListaPos::posicion pos = lista.getPrimera();
+	while (!existe && cont < numElem){ //pos
+		if( lista.recuperar(pos) == elemento ){
+			existe = true;
+		}
+		++cont;
+		pos = lista.siguiente(pos);
+	}
+	return existe;
+}
+
+///ListaPos::posicion pos = lista.getPrimera();
+
+/*
+@Efectua:Deja en L3 el resultado de la intersección de L1 y L2.
+@Requiere: L1 y L2 sean listas ordenadas y sin elementos repetidos, L3 inicializada y vacía.
+@Modifica: Modifica L3
+*/
+void interseccionOrdenadasV1(ListaPos& l1, ListaPos& l2, ListaPos& l3){
+  ListaPos::posicion posActual1 = l1.getPrimera();
+  ListaPos::posicion posActual2 = l2.getPrimera();
+  int elem1 = l1.recuperar(posActual1);
+  int elem2 = l2.recuperar(posActual2);
+  // Se usan las variables elem1 y elem2 con el fin de no hacer muchos llamados al metodo recuperar(int)
+  int numElemL1= l1.numElem();
+  int numElemL2= l2.numElem();
+  //cout<<"nE1: "<<numElemL1<<endl;
+  //cout<<"nE2: "<<numElemL2<<endl;
+  bool end = false;
+  int cantElementosR1 = 1; // Me indica si la cantidad de elemetnos recorridos en l1
+  int cantElementosR2 = 1;
+  //cout<<"outside whileEE el1: "<<elem1<<endl;
+  //cout<<"outside while el2: "<<elem2<<endl;
+  while (!end) {
+    if(elem1 == elem2){
+      cout<<"Muerte en el if ==\n";
+      l3.agregarUltimo(elem1);
+      if(cantElementosR1 <numElemL1){
+        // cout<<"Muerte en el if anidado == 1\n";
+        posActual1 = l1.siguiente(posActual1);
+      //  cout<<"BEFORE_RECUPERAR_1\n";
+        elem1 = l1.recuperar(posActual1);
+      }
+      if(cantElementosR2 <numElemL2){
+       // cout<<"Muerte en el if anidado == 2\n";
+       posActual2 = l2.siguiente(posActual2);
+       elem2 = l2.recuperar(posActual2);
+      }
+      /* cout<<"Muerte before el rec1 \n";
+      cout<<"Muerte en el rec1 \n";
+      cout<<"Muerte en el rec2 \n";
+      */
+      ++cantElementosR1;
+      ++cantElementosR2;
+      /* cout<<" el1: "<<elem1<<endl;
+      cout<<"el2: "<<elem2<<endl;
+      cout<<"++cantElementosR1: "<<cantElementosR1<<endl;
+      cout<<"++cantElementosR2: "<<cantElementosR2<<endl;
+      */
+    }
+    else{
+      if (elem1>elem2){
+        //cout<<"Muerte en el else if\n";
+        if(cantElementosR2 <numElemL2){
+          posActual2 = l2.siguiente(posActual2);
+        }
+        elem2 = l2.recuperar(posActual2);
+        ++cantElementosR2;
+        /* cout<<"el2: "<<elem2<<endl;
+        cout<<"++cantElementosR2: "<<cantElementosR2<<endl;
+        */
+      }
+      else{
+         // cout<<"Muerte en el else else\n";
+          if(cantElementosR1 <numElemL1){
+            posActual1 = l1.siguiente(posActual1);
+          }
+          elem1 = l1.recuperar(posActual1);
+          ++cantElementosR1;
+          //cout<<"el1: "<<elem1<<endl;
+          //cout<<"++cantElementosR1: "<<cantElementosR1<<endl;
+
+      }
+    }
+    if(cantElementosR1 >= numElemL1 && cantElementosR2 >= numElemL2 ){
+      //cout<<"entre end = true\n";
+      end = true;
+    }
+  }
+  }
+
+/*
+@Efectua: Deja en L3 el resultado de la intersección de L1 y L2(emplea un algoritmo de busqueda auxiliar).
+@Requiere:Requiere que L1 y L2 estén inicializadas y sean listas ordenadas y sin elementos repetidos.
+L3 inicializada y sin elementos
+@Modifica: Modifica la L3
+*/
+
+void interseccionOrdenadasV2(ListaPos& l1, ListaPos& l2, ListaPos& l3){
+  int elem1;// Se usa la variable elem1 con el fin de no hacer muchos llamados al metodo recuperar(int)
+  int numElemL1= l1.numElem();
+  ListaPos::posicion posActual1 = l1.getPrimera();
+  for(int actual1= 0; actual1 < numElemL1; ++actual1){
+		//cout<<"for 1 inicio";
+    elem1 = l1.recuperar(posActual1);
+    if(buscar(l2,elem1)){
+			//cout<<"if\n";
+      l3.agregarUltimo(elem1);
+    }
+		//cout<<"for 1 final";
+    posActual1 = l1.siguiente(posActual1);
+  }
+}
+
+/*
+@Efectua: Deja en L3 el resultado de la intersección de L1 y L2(Supone que L1 y L2 son
+listas NO necesariamente ordenadas).
+@Requiere:L1 y L2 no tengan elementos repetidos y estén inicializdas.
+@Modifica: Modifica L3
+*/
+void interseccionNoOrdenadas(ListaPos& l1, ListaPos& l2, ListaPos& l3){
+  int elem1;
+  // Se usa la variable elem1 con el fin de no hacer muchos llamados al metodo recuperar(int)
+  int numElemL1= l1.numElem();
+  int numElemL2= l2.numElem();
+  ListaPos::posicion posActual1 = l1.getPrimera();
+  ListaPos::posicion posActual2 = l2.getPrimera();
+  bool encontrada;
+  for(int actual1= 0; actual1 < numElemL1; ++actual1){
+    elem1 = l1.recuperar(posActual1);
+    encontrada = false;
+		//cout<<"for 1 incio\n";
+    for(int actual2 = 0;actual2 < numElemL2 && !encontrada;++actual2 ){
+			//cout<<"for 2 incio\n";
+			if(elem1 == l2.recuperar(posActual2)){
+        l3.agregarUltimo(elem1);
+        encontrada = true;
+			//	cout<<"if 1 \n";
+      }
+       	posActual2 = l2.siguiente(posActual2);
+			//cout<<"for 2 final \n";
+    }
+
+		 posActual2 = l2.getPrimera();
+
+     posActual1 = l1.siguiente(posActual1);
+		 //cout<<"for 1 final\n";
+  }
+}
+
+
+/*
+@Efectua:Le agrega a L1 los elementos que están en L2, de manera que en L1 no
+queden elementos repetidos(Supone que L1 y L2 son listas NO necesariamente ordenadas).
+@Requiere:L1 y L2 inicializadas y que no tengan elementos repetidos.
+@Modifica: Modifica L1
+*/
+void unionNoOrdenadas(ListaPos& l1, ListaPos& l2){
+  int elem2;
+  // Se usa la variable elem1 con el fin de no hacer muchos llamados al metodo recuperar(int)
+  int numElemL1= l1.numElem();
+  int numElemL2= l2.numElem();
+  bool encontrada;
+  ListaPos::posicion posActual1 = l1.getPrimera();
+  ListaPos::posicion posActual2 = l2.getPrimera();
+  for(int actual2= 0; actual2 < numElemL2; ++actual2){
+    elem2 = l2.recuperar(posActual2);
+    encontrada = false;
+	//	cout<<"for1 inicio\n";
+    for(int actual1 = 0; actual1 < numElemL1 && !encontrada;++actual1 ){
+		//	cout<<"for2 inicio\n";
+			if(elem2 == l1.recuperar(posActual1)){
+        encontrada = true;
+			//	cout<<"if 1\n";
+			}
+			//cout<<"AP\n";
+      posActual1 = l1.siguiente(posActual1);
+			//cout<<"AD\n";
+    }
+		posActual1 = l1.getPrimera();
+		//cout<<"for1 antes de posa2\n";
+    posActual2 = l2.siguiente(posActual2);
+    if (!encontrada) {
+			//cout<<"if 2\n";
+      l1.agregarUltimo(elem2);
+    }
+  }
+}
+
+
