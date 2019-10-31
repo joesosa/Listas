@@ -61,3 +61,120 @@ void unionListas(ListaOrdenada& lista1, ListaOrdenada& lista2, ListaOrdenada& li
 	} 
 	
 }
+
+
+
+
+bool iguales(ListaOrdenada& l1, ListaOrdenada& l2){
+  bool iguales = true;
+  int actual1 = l1.primero();
+  int actual2 = l2.primero();
+  int cantElementos = 0;
+  if(l1.numElem()!=l2.numElem()){
+    iguales = false;
+    cantElementos = l1.numElem();
+  }
+  int contador = 1;
+  while(iguales && contador<= cantElementos){
+    if(actual1 != actual2){
+      iguales = false;
+    }
+    else{
+      actual1 = l1.siguiente(actual1);
+      actual2 = l2.siguiente(actual2);
+      ++contador;
+    }
+  }
+  return iguales;
+}
+
+
+bool contenida(ListaOrdenada& listaPorVerificar, ListaOrdenada& listaPrincipal){
+  bool contenida = false;
+  if(listaPrincipal.numElem() >= listaPorVerificar.numElem()){
+    int actual1 = listaPorVerificar.primero();
+    int actual2 = listaPrincipal.primero();
+    int cantElementosLPorVerificar= listaPorVerificar.numElem();
+    int elemContenidos = 0;
+    int cantElementosLPrincipal = listaPrincipal.numElem();
+    for (int i = 1; i <= cantElementosLPrincipal && elemContenidos!=cantElementosLPorVerificar ; ++i) {
+      if(actual1 == actual2){
+         ++elemContenidos;
+         actual1 = listaPorVerificar.siguiente(actual1);
+         actual2 = listaPrincipal.siguiente(actual2);
+       }
+       else{
+         actual2 = listaPrincipal.siguiente(actual2);
+       }
+    }
+    if(elemContenidos == cantElementosLPorVerificar){
+      contenida = true;
+      }
+    }
+   return contenida;
+  }
+
+
+void borrarComunes(ListaOrdenada& l1, ListaOrdenada& l2){
+int actual1 = l1.primero();
+int actual2 = l2.primero();
+int numElemL1= l1.numElem();
+int victima;
+cout<<"numElemL1:"<<numElemL1<<endl;
+bool end = false;
+int cantElementosR1 = 0;
+while (!end) {
+  if(actual1 == actual2){
+    victima = actual1;
+    actual1 = l1.siguiente(actual1);
+    actual2 = l2.siguiente(actual2);
+    l1.borrar(victima);
+    ++cantElementosR1;
+    cout<<"cantElementosR1:"<<cantElementosR1<<endl;
+  }
+  else{
+    if (actual1>actual2){
+      actual2 = l2.siguiente(actual2);
+    }
+    else{
+        actual1 = l1.siguiente(actual1);
+        ++cantElementosR1;
+    }
+  }
+  if(cantElementosR1 == numElemL1){
+    end = true;
+  }
+}
+}
+
+
+void interseccion(ListaOrdenada& l1, ListaOrdenada& l2, ListaOrdenada& l3){
+  int actual1 = l1.primero();
+  int actual2 = l2.primero();
+  int numElemL1= l1.numElem();
+  int numElemL2= l2.numElem();
+  bool end = false;
+  int cantElementosR1 = 0;
+  int cantElementosR2 = 0;
+  while (!end) {
+    if(actual1 == actual2){
+      l3.insertar(actual1);
+      actual1 = l1.siguiente(actual1);
+      actual2 = l2.siguiente(actual2);
+      ++cantElementosR1;
+    }
+    else{
+      if (actual1>actual2){
+        actual2 = l2.siguiente(actual2);
+      }
+      else{
+          actual1 = l1.siguiente(actual1);
+          ++cantElementosR1;
+      }
+    }
+    if(cantElementosR1 == numElemL1 || cantElementosR2 == numElemL2){
+      end = true;
+    }
+  }
+  }
+
