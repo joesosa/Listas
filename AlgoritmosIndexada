@@ -370,6 +370,12 @@ void unionOrdenadas(ListaInd& l1, ListaInd& l2){
   }
 
 
+
+/*
+@Efecto: Busca la posición donde está el elemento mayor de los primeros dos elementos distintos de la lista si los hay.
+@Requiere: Una lista no vacia, e inicializada, y posiciones inicial y final validas dentro de la lista.
+@Modifica: Este método no modifica l1.
+*/
 int encuentraPivoteAho(ListaInd& l1, int inicial, int final) {
 	int pivoteTemp1 = l1.recuperar(inicial);
 	int indicePivote = -1;
@@ -392,11 +398,15 @@ int encuentraPivoteAho(ListaInd& l1, int inicial, int final) {
 }
 
 
+/*
+@Efecto: Deja en l1 los elementos mayores o iguales que un valor "pivote" del lado derecho de la lista, y los menores de lado izquierdo.
+@Requiere: Una lista no vacia, e inicializada, y posiciones inicial y final validas dentro de la lista.
+@Modifica: Este método modifica el orden de los elementos de la lista l1, si no tiene todos los elementos iguales.
+*/
 int parteYOrdena(ListaInd& l1, int inicial, int final) {
 	int pivote = l1.recuperar(encuentraPivoteAho(l1, inicial, final));
 	int inicioEMP = -1; // Guarda el indice donde inician los elemento mayores que el pivote
 	while (inicial < final) {
-		cout << "intercambiar\n\n";
 		l1.intercambiar(inicial, final);
 		while (l1.recuperar(inicial) < pivote) {
 			++inicial;
@@ -409,6 +419,12 @@ int parteYOrdena(ListaInd& l1, int inicial, int final) {
 	return inicioEMP;
 }
 
+
+/*
+@Efecto: Ordena los elementos ascendentemente de la lista.
+@Requiere: Una lista no vacia, e inicializada, y posiciones inicial y final validas dentro de la lista.
+@Modifica: Este método modifica el orden de los elementos de la lista l1 si no están en orden ascendente, y tiene no tiene todos los elementos iguales.
+*/
 void quickSort(ListaInd& l1, int inicial, int final){
 	if (inicial!=final && inicial < final && encuentraPivoteAho(l1,inicial,final)!= -1){
 		int indiceDivisor = parteYOrdena(l1, inicial, final);
