@@ -171,3 +171,136 @@ bool subLista(ListaInd& lista1, ListaInd& lista2){
 	}
 	return esSubLista;
 }
+
+
+/*
+@Efectua: Busca en la lista el elemento recibido como parametro y devuelve si existe o no
+@Requiere: Una lista no vacia y un elemento valido(de tipo) en la lista
+@Modifica: Este metodo no modifica nada
+*/
+bool buscar(ListaInd& lista, int elemento){
+	bool existe = false;
+	int actual = 0;
+	while (!existe && actual < lista.numElem()){
+		if( lista.recuperar(actual) == elemento ){
+			existe = true;
+		}
+		++actual;
+	}
+	return existe;
+}
+
+
+
+/*
+@Efectua:Deja en L3 el resultado de la intersección de L1 y L2.
+@Requiere: L1 y L2 sean listas ordenadas y sin elementos repetidos, L3 inicializada y vacía.
+@Modifica: Modifica L3
+*/
+void interseccionOrdenadasV1(ListaInd& l1, ListaInd& l2, ListaInd& l3){
+  int actual1 = 0;
+  int elem1 = l1.recuperar(actual1);
+  int actual2 = 0;
+  int elem2 = l2.recuperar(actual2);
+  // Se usan las variables elem1 y elem2 con el fin de no hacer muchos llamados al metodo recuperar(int)
+  int actual3 = 0;
+  int numElemL1= l1.numElem();
+  int numElemL2= l2.numElem();
+  bool end = false;
+  int cantElementosR1 = 0; // Me indica si la cantidad de elemetnos recorridos en l1
+  int cantElementosR2 = 0;
+  while (!end) {
+    if(elem1 == elem2){
+      l3.insertar(elem1,actual3++);
+      elem1 = l1.recuperar(++actual1);
+      elem2 = l2.recuperar(++actual2);
+      ++cantElementosR1;
+      ++cantElementosR2;
+    }
+    else{
+      if (elem1>elem2){
+        elem2 = l2.recuperar(++actual2);
+        ++cantElementosR2;
+      }
+      else{
+          elem1 = l1.recuperar(++actual1);
+          ++cantElementosR1;
+      }
+    }
+    if(cantElementosR1 == numElemL1 || cantElementosR2 == numElemL2 ){
+      end = true;
+    }
+  }
+  }
+
+/*
+@Efectua: Deja en L3 el resultado de la intersección de L1 y L2(emplea un algoritmo de busqueda auxiliar).
+@Requiere:Requiere que L1 y L2 estén inicializadas y sean listas ordenadas y sin elementos repetidos.
+L3 inicializada y sin elementos
+@Modifica: Modifica la L3
+*/
+
+void interseccionOrdenadasV2(ListaInd& l1, ListaInd& l2, ListaInd& l3){
+  int elem1;// Se usa la variable elem1 con el fin de no hacer muchos llamados al metodo recuperar(int)
+  int numElemL1= l1.numElem();
+  int actual3= 0;
+  for(int actual1= 0; actual1 <= numElemL1; ++actual1){
+    elem1 = l1.recuperar(actual1);
+    if(buscar(l2,elem1)){
+      l3.insertar(elem1,actual3++);
+    }
+  }
+}
+
+/*
+@Efectua: Deja en L3 el resultado de la intersección de L1 y L2(Supone que L1 y L2 son
+listas NO necesariamente ordenadas).
+@Requiere:L1 y L2 no tengan elementos repetidos y estén inicializdas.
+@Modifica: Modifica L3
+*/
+void interseccionNoOrdenadas(ListaInd& l1, ListaInd& l2, ListaInd& l3){
+  int elem1;
+  // Se usa la variable elem1 con el fin de no hacer muchos llamados al metodo recuperar(int)
+  int numElemL1= l1.numElem();
+  int numElemL2= l2.numElem();
+  int actual3= 0;
+  bool encontrada;
+  for(int actual1= 0; actual1 < numElemL1; ++actual1){
+    elem1 = l1.recuperar(actual1);
+    encontrada = false;
+    for(int actual2 = 0;actual2 < numElemL2 && !encontrada;++actual2 ){
+      if(elem1 == l2.recuperar(actual2)){
+        l3.insertar(elem1,actual3++);
+        encontrada = true;
+      }
+    }
+  }
+}
+
+
+/*
+@Efectua:Le agrega a L1 los elementos que están en L2, de manera que en L1 no
+queden elementos repetidos(Supone que L1 y L2 son listas NO necesariamente ordenadas).
+@Requiere:L1 y L2 inicializadas y que no tengan elementos repetidos.
+@Modifica: Modifica L1
+*/
+void unionNoOrdenadas(ListaInd& l1, ListaInd& l2){
+  int elem2;
+  // Se usa la variable elem1 con el fin de no hacer muchos llamados al metodo recuperar(int)
+  int numElemL1= l1.numElem();
+  int numElemL2= l2.numElem();
+  bool encontrada;
+  int posElemInsercion;
+  for(int actual2= 0; actual2 < numElemL2; ++actual2){
+    elem2 = l2.recuperar(actual2);
+    encontrada = false;
+    for(int actual1 = 0; actual1 < numElemL1 && !encontrada;++actual1 ){
+      if(elem2 == l1.recuperar(actual1)){
+        encontrada = true;
+      }
+    }
+    if (!encontrada) {
+      l1.insertar(elem2,l1.numElem());
+    }
+  }
+}
