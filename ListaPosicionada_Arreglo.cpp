@@ -7,7 +7,6 @@ ListaPos::ListaPos(){ //Iniciar(L)
 
 ListaPos::~ListaPos(){
 	delete vListaPos;	//Destruir(L)
-	delete this;
 }
 
 void ListaPos::vaciar(){ //Vaciar(L)
