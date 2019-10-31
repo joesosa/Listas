@@ -150,23 +150,25 @@ void eliminarRepetidos(ListaInd& lista){
 @Requiere: Una lista no vacia y de tamano minimo de dos
 @Modifica: Este metodo modifica la lista
 */
-bool subLista(ListaInd& lista1, ListaInd& lista2){
+bool subLista(ListaInd& lista1, ListaInd& lista2) {
 	int indiceL1 = 0;
 	int indiceL2 = 0;
+	int indiceL2aux = 0;
 	bool esSubLista = false;
-	while(!esSubLista && indiceL2 < lista2.numElem()){
+	while (!esSubLista && indiceL2 < lista2.numElem()) {
 		int cont = 0;
-		while(!esSubLista && indiceL1 < lista1.numElem() && lista1.recuperar(indiceL1) == lista2.recuperar(indiceL2) ){
+		indiceL2aux = indiceL2;
+		while (!esSubLista && indiceL1 < lista1.numElem() && indiceL2aux < lista2.numElem() && lista1.recuperar(indiceL1) == lista2.recuperar(indiceL2aux)) {
 			++cont;
-			if(cont == lista1.numElem()){
+			if (cont == lista1.numElem()) {
 				esSubLista = true;
 			}
 			++indiceL1;
-			++indiceL2;
+			++indiceL2aux;
 		}
 		indiceL1 = 0;
-		if(lista1.recuperar(indiceL1) != lista2.recuperar(indiceL2)){
-				++indiceL2;
+		if (lista1.recuperar(indiceL1) != lista2.recuperar(indiceL2)) {
+			++indiceL2;
 		}
 	}
 	return esSubLista;
