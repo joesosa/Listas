@@ -64,7 +64,9 @@ void unionListas(ListaOrdenada& lista1, ListaOrdenada& lista2, ListaOrdenada& li
 
 
 
-
+//Efecto: Averigua si L1 es igual a L2, y retorna un booleano true si son iguales, false si no lo son.
+//Requiere: L1 , L2 inicializadas
+//Modifica: No modifica las listas
 bool iguales(ListaOrdenada& l1, ListaOrdenada& l2){
   bool iguales = true;
   int actual1 = l1.primero();
@@ -89,6 +91,9 @@ bool iguales(ListaOrdenada& l1, ListaOrdenada& l2){
 }
 
 
+//Efecto: Revisa si la lista listaPorVerificar está contenida en listaPrincipal, retorna un booleano true si está contenida, false si no
+//Requiere: listaPorVerificar  y listaPrincipal inicializadas
+//Modifica: No modifica las listas
 bool contenida(ListaOrdenada& listaPorVerificar, ListaOrdenada& listaPrincipal){
   bool contenida = false;
   if(listaPrincipal.numElem() >= listaPorVerificar.numElem()){
@@ -114,7 +119,9 @@ bool contenida(ListaOrdenada& listaPorVerificar, ListaOrdenada& listaPrincipal){
    return contenida;
   }
 
-
+//Efecto:Eliminar de l1 los elementos que están en l2
+//Requiere:l1,l2 inicializadas
+//Modifica: Modifica la lista l1
 void borrarComunes(ListaOrdenada& l1, ListaOrdenada& l2){
 int actual1 = l1.primero();
 int actual2 = l2.primero();
@@ -147,7 +154,9 @@ while (!end) {
 }
 }
 
-
+//Efecto:Deja en L3 el resultado de la intersección de L1 y L2
+//Requiere:l1,l2,l3 inicializadas
+//Modifica: Modifica la lista l3
 void interseccion(ListaOrdenada& l1, ListaOrdenada& l2, ListaOrdenada& l3){
   int actual1 = l1.primero();
   int actual2 = l2.primero();
