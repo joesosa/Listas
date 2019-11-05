@@ -13,7 +13,7 @@ ConstruirGrafo(Grafo grafoDirigido, Arreglo etiquetas, Matriz matrizPesos){
 			if(nuevoPeso > 0){
 				etiquetaI = grafoDirigido.Etiqueta(i)
 				etiquetaJ = grafoDirigido.Etiqueta(j)
-				grafoDirigido.(etiquetaI,etiquetaJ,nuevoPeso)
+				grafoDirigido.AgregarArista(etiquetaI,etiquetaJ,nuevoPeso)
 			}
 
 		}
