@@ -1,0 +1,237 @@
+#include "pch.h"
+#include <iostream>
+#include <chrono>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
+#include "ListaIndexada_LSE.h"
+//#include "ListaIndexada_LSE.h"
+
+
+
+void insercion(ListaInd& l1, ListaInd& l2, int total) {
+	//auto inicio = chrono::steady_clock::now();
+	for (int i = 0; i < total; ++i) {
+		l1.insertar(rand()%1000000,i);
+		l2.insertar(rand() % 1000000, i);
+	}
+	/*auto fin = chrono::steady_clock::now();
+
+	cout << "Duracion : "
+		<< chrono::duration_cast<chrono::nanoseconds>(fin - inicio).count()
+		<< " nanosegundos" << endl;
+
+	cout << "Duracion: "
+		<< chrono::duration_cast<chrono::microseconds>(fin - inicio).count()
+		<< " microsegundos" << endl;*/
+}
+//void insercion(ListaPos& l1, int total) {
+//	auto inicio = chrono::steady_clock::now();
+//	for (int i = 0; i < total; ++i) {
+//		l1.agregarUltimo(i);
+//	}
+//	auto fin = chrono::steady_clock::now();
+//
+//	cout << "Duracion: "
+//		<< chrono::duration_cast<chrono::nanoseconds>(fin - inicio).count()
+//		<< " nanosegundos" << endl;
+//
+//	cout << "Duracion: "
+//		<< chrono::duration_cast<chrono::microseconds>(fin - inicio).count()
+//		<< " microsegundos" << endl;
+//}
+//
+//void busquedas(ListaInd& l1, int total) {
+//	auto inicio = chrono::steady_clock::now();
+//	int valorAleatorio = 0;
+//	for (int i = 0; i < total; ++i) {
+//		valorAleatorio = rand() % total;
+//		l1.recuperar(valorAleatorio);
+//	}
+//	auto fin = chrono::steady_clock::now();
+//
+//	cout << " : "
+//		<< chrono::duration_cast<chrono::nanoseconds>(fin - inicio).count()
+//		<< " nanosegundos" << endl;
+//
+//	cout << "Duracion: "
+//		<< chrono::duration_cast<chrono::microseconds>(fin - inicio).count()
+//		<< " microsegundos" << endl;
+//}
+//
+//void busquedas(ListaPos& l1, int total) {
+//	auto inicio = chrono::steady_clock::now();
+//	int valorAleatorio = 0;
+//	for (int i = 0; i < total; ++i) {
+//		valorAleatorio = rand() % total;
+//		l1.recuperar(valorAleatorio);
+//	}
+//	auto fin = chrono::steady_clock::now();
+//
+//	cout << "Duracion: "
+//		<< chrono::duration_cast<chrono::nanoseconds>(fin - inicio).count()
+//		<< " nanosegundos" << endl;
+//
+//	cout << "Duracion: "
+//		<< chrono::duration_cast<chrono::microseconds>(fin - inicio).count()
+//		<< " microsegundos" << endl;
+//}
+
+int encuentraPivoteAho(ListaInd& l1, int inicial, int final) {
+	int pivoteTemp1 = l1.recuperar(inicial);
+	int indicePivote = -1;
+	bool pivoteEncontrado = false;
+	int contador = inicial;
+	while (contador <= final && !pivoteEncontrado) {
+		if (pivoteTemp1 > l1.recuperar(contador)) {
+			pivoteEncontrado = true;
+			indicePivote = inicial;
+		}
+		else if (pivoteTemp1 < l1.recuperar(contador)) {
+			pivoteEncontrado = true;
+			indicePivote = contador;
+		}
+		++contador;
+	}
+	return indicePivote;
+}
+
+int parteYOrdenaAho(ListaInd& l1, int inicial, int final) {
+	int pivote = l1.recuperar(encuentraPivoteAho(l1, inicial, final));
+	int inicioEMP = -1; // Guarda el indice donde inician los elemento mayores que el pivote
+	while (inicial < final) {
+		l1.intercambiar(inicial, final);
+		while (l1.recuperar(inicial) < pivote) {
+			++inicial;
+			inicioEMP = inicial;
+		}
+		while (l1.recuperar(final) >= pivote) {
+			--final;
+		}
+	}
+	return inicioEMP;
+}
+
+void quickSortAho(ListaInd& l1, int inicial, int final) {
+	if (inicial != final && inicial < final && encuentraPivoteAho(l1, inicial, final) != -1) {
+		int indiceDivisor = parteYOrdenaAho(l1, inicial, final);
+		quickSortAho(l1, inicial, indiceDivisor - 1);
+		quickSortAho(l1, indiceDivisor, final);
+	}
+}
+
+
+void merge(ListaInd l1, ListaInd l2, ListaInd& l3) {
+	l3.vaciar();
+	int actualL1 = 0;
+	int actualL2 = 0;
+	int ultimoL1 = l1.numElem() - 1;
+	int ultimoL2 = l2.numElem() - 1;
+	int actualL3 = 0;
+	while (actualL1 <= ultimoL1 || actualL2 <= ultimoL2) {
+		if (actualL1 <= ultimoL1 && actualL2 <= ultimoL2) {
+			if (l1.recuperar(actualL1) <= l2.recuperar(actualL2)) {
+				l3.insertar(l1.recuperar(actualL1), actualL3++);
+				++actualL1;
+			}
+			else {
+				l3.insertar(l2.recuperar(actualL2), actualL3++);
+				++actualL2;
+			}
+		}
+		else {
+			if (actualL1 <= ultimoL1) {
+				l3.insertar(l1.recuperar(actualL1), actualL3++);
+				++actualL1;
+			}
+			else {
+				l3.insertar(l2.recuperar(actualL2), actualL3++);
+				++actualL2;
+			}
+		}
+	}
+}
+/*
+@Efectua: Ordena ascendentemente los elementos en una lista usando el algoritmo de MergeSort
+@Requiere: Una lista lista inicializada, no vacia sin elementos repetidos, posicion de inicio y final validas dentro de la lista
+@Modifica: La posicion de los elementos en la lista
+*/
+void mergeSort(ListaInd& lista) {
+	int numElem = lista.numElem();
+	if (numElem > 1) {
+		int mitad = numElem / 2;
+		int posActual = 0;
+		ListaInd primerMitad = ListaInd();
+		ListaInd segundaMitad = ListaInd();
+		for (int i = 0; i < mitad; ++i) {
+			primerMitad.insertar(lista.recuperar(posActual), i);
+			++posActual;
+		}
+		for (int i = mitad; i < numElem; ++i) {
+			segundaMitad.insertar(lista.recuperar(posActual), i);
+			++posActual;
+		}
+		mergeSort(primerMitad);
+		mergeSort(segundaMitad);
+		merge(primerMitad, segundaMitad, lista);
+	}
+}
+
+
+
+
+bool revisarOrden(ListaInd& l1) {
+	bool ordenada = true;
+	for (int i = 0; i < l1.numElem()-1;++i) {
+		if (l1.recuperar(i)> l1.recuperar(i+1)) {
+			ordenada = false;
+			cout << "i:"<<i;
+			break;
+		}
+	}
+	return ordenada;
+}
+
+int main()
+{	
+
+	srand(time(NULL));
+	int tamaño = 10;
+	ListaInd l1;
+	ListaInd l2;
+	insercion(l1,l2,tamaño);
+	l2.imprimir();
+	auto inicio = chrono::steady_clock::now();
+	quickSortAho(l1,0,l1.numElem()-1);
+	auto fin = chrono::steady_clock::now();
+	cout << "Duracion quickSortAho: "
+		<< chrono::duration_cast<chrono::seconds>(fin - inicio).count()
+		<< " segundos" << endl;
+	cout << "Duracion quickSortAho: "
+		<< chrono::duration_cast<chrono::milliseconds>(fin - inicio).count()
+		<< " milisegundos" << endl;
+	if (revisarOrden(l1)) {
+		cout << "esta ordenada carepichas";
+	}
+
+
+	cout << "**********************************************\n";
+	inicio = chrono::steady_clock::now();
+	mergeSort(l2);
+	fin = chrono::steady_clock::now();
+	cout << "Duracion mergeSort: "
+		<< chrono::duration_cast<chrono::seconds>(fin - inicio).count()
+		<< " segundos" << endl;
+	cout << "Duracion mergeSort: "
+		<< chrono::duration_cast<chrono::milliseconds>(fin - inicio).count()
+		<< " milisegundos" << endl;
+	if (revisarOrden(l1)) {
+		cout << "esta ordenada carepichas";
+	}
+	l2.imprimir();
+	
+	
+
+
+	return 0;
+}
