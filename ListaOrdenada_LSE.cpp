@@ -61,6 +61,7 @@ void ListaOrdenada::insertar(int elemento){
 		ref = ref->siguiente;
 	}
 	if(!existe){
+		++numElementos;
 		Celda * nueva = new Celda(elemento);
 		if(!vacia()){
 			Celda * actual = primera;
@@ -94,7 +95,7 @@ void ListaOrdenada::insertar(int elemento){
 		}
     }
 	else{
-		cout<<"El elemento ya existe"<<endl;
+		//cout<<"El elemento ya existe"<<endl;
     }
 		
 }

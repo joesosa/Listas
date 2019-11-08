@@ -1,7 +1,7 @@
 #include "ListaPosicionada_Arreglo.h"
 
 ListaPos::ListaPos(){ //Iniciar(L)
-	vListaPos = new int[20];
+	vListaPos = new int[100000];
 	ultimoLleno = -1;
 }
 
