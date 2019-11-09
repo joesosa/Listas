@@ -1,0 +1,89 @@
+#include "pch.h"
+#include <iostream>
+#include <chrono>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
+#include "ListaPosicionada_LDE.h"
+#include "ListaPosicionada_LSE.h"
+
+void insercion(ListaPos& l1, int total) {
+	for (int i = 0; i < total; ++i) {
+		l1.insertar(rand() % 1000000, i);
+	}
+}
+
+bool revisarOrden(ListaPos& l1) {
+	bool ordenada = true;
+	for (int i = 0; i < l1.numElem() - 1; ++i) {
+		if (l1.recuperar(i) > l1.recuperar(i + 1)) {
+			ordenada = false;
+			cout << "i:" << i;
+			break;
+		}
+	}
+	return ordenada;
+}
+
+
+void Burbuja_Bidireccional(ListaPos& lista) {
+	ListaPos::posicion actual = lista.getPrimera();
+	int numElem = lista.numElem();
+	int faltan = numElem - 1;
+	int dir = 1; //0 para la izq 1 para la der 
+	for (int i = 0; i < numElem; ++i)
+	{
+		for (int j = 0; j < faltan; ++j)
+		{
+			if (dir) {
+				if (lista.recuperar(actual) > lista.recuperar(lista.siguiente(actual)))
+				{
+					lista.intercambiar(actual, lista.siguiente(actual));
+				}
+				actual = lista.siguiente(actual);
+			}
+			else {
+				if (lista.recuperar(actual) < lista.recuperar(lista.anterior(actual)))
+				{
+					lista.intercambiar(actual, lista.anterior(actual));
+				}
+				actual = lista.anterior(actual);
+			}
+		}
+		if (dir) {
+			actual = lista.anterior(actual);
+		}
+		else {
+			actual = lista.siguiente(actual);
+		}
+		dir = (dir + 1) % 2;
+		--faltan;
+	}
+}
+
+
+int main()
+{
+	srand(time(NULL));
+	int tamaño = 10000;
+	ListaPos l1;
+	insercion(l1,tamaño);
+	//cout << "L1:" << endl;
+	//l1.imprimir();
+	Burbuja_Bidireccional(l1);
+	auto inicio = chrono::steady_clock::now();
+	auto fin = chrono::steady_clock::now();
+	cout << "Duracion Burbuja-Bidireccional"
+		<< chrono::duration_cast<chrono::seconds>(fin - inicio).count()
+		<< " segundos" << endl;
+	cout << "Duracion Burbuja-Bidireccional:"
+		<< chrono::duration_cast<chrono::milliseconds>(fin - inicio).count()
+		<< " milisegundos" << endl;
+	if (revisarOrden(l1)) {
+		cout << "esta ordenada carepichas";
+	}
+	//cout << "L1:" << endl;
+	//l1.imprimir();
+	cout << "*******************************\n";
+	return 0;
+}
