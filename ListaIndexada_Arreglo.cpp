@@ -1,5 +1,7 @@
+#include "pch.h"
+
 #include "ListaIndexada_Arreglo.h"
-#define ESPACIO 20
+#define ESPACIO 50000
 
 
 

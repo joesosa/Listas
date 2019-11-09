@@ -29,8 +29,10 @@ void merge(ListaPos& l1, ListaPos& l2, ListaPos& l3) {
 	l3.vaciar();
 	ListaPos::posicion actualL1 = l1.getPrimera();
 	ListaPos::posicion actualL2 = l2.getPrimera();
-	while (actualL1 || actualL2) {
-		if (actualL1 && actualL2) {
+	ListaPos::posicion ultimaL1 = l1.getUltima();
+	ListaPos::posicion ultimaL2 = l2.getUltima();
+	while ((actualL1 >-1 && actualL1 <= ultimaL1)|| (actualL2 > -1 && actualL2 <= ultimaL2)) {
+		if ((actualL1 > -1 && actualL1 <= ultimaL1) && (actualL2 > -1 && actualL2 <= ultimaL2)) {
 			if (l1.recuperar(actualL1) <= l2.recuperar(actualL2)) {
 				l3.agregarUltimo(l1.recuperar(actualL1));
 				actualL1 = l1.siguiente(actualL1);
@@ -41,7 +43,7 @@ void merge(ListaPos& l1, ListaPos& l2, ListaPos& l3) {
 			}
 		}
 		else {
-			if (actualL1) {
+			if (actualL1 > -1 && actualL1 <= ultimaL1) {
 				l3.agregarUltimo(l1.recuperar(actualL1));
 				actualL1 = l1.siguiente(actualL1);
 			}
@@ -129,9 +131,9 @@ int main()
 	ListaInd ind;
 	ListaOrdenada oort;
 
-	cout << "\n************ POSICIONADA**************";
+	cout << "\n************ MERGE**************";
 
-	insercion(pos, 1000);
+	insercion(pos, 100000);
 	cout << "\n****************************\n1000:\n";
 	auto inicio = chrono::steady_clock::now();
 	mergeSort(pos);
@@ -140,17 +142,17 @@ int main()
 	cout << "Duracion: "
 		<< chrono::duration_cast<chrono::milliseconds>(fin - inicio).count()
 		<< " milisegundos" << endl;
+
+	/*
 	pos.vaciar();
-	insercion(pos, 50000);
-	 inicio = chrono::steady_clock::now();
-	 mergeSort(pos);
+	insercion(pos, 5000);
+	inicio = chrono::steady_clock::now();
+	Burbuja_BiDireccional(pos);
 	fin = chrono::steady_clock::now();
 
 	cout << "Duracion: "
 		<< chrono::duration_cast<chrono::milliseconds>(fin - inicio).count()
 		<< " milisegundos" << endl;
-
-/*
 	pos.vaciar();
 	insercion(pos, 10000);
 	cout << "\n****************************\n10000:\n";
@@ -161,6 +163,7 @@ int main()
 	cout << "Duracion: "
 		<< chrono::duration_cast<chrono::milliseconds>(fin - inicio).count()
 		<< " milisegundos" << endl;
+
 	pos.vaciar();
 	insercion(pos, 10000);
 	inicio = chrono::steady_clock::now();
@@ -191,7 +194,7 @@ int main()
 	cout << "Duracion: "
 		<< chrono::duration_cast<chrono::milliseconds>(fin - inicio).count()
 		<< " milisegundos" << endl;
-*/
+	*/
 
 	return 0;
 }

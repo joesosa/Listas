@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "ListaPosicionada_Arreglo.h"
 
 ListaPos::ListaPos(){ //Iniciar(L)

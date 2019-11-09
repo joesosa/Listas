@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "ListaOrdenada_Arreglo.h"
 #define ESPACIO 20
 
